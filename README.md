@@ -30,6 +30,14 @@
 + 使用autopep8做格式化
 + 代码统一用tensorflow，keras啥的就不要凑热闹了
 
+## 数据存储位置
+
+数据集可以去kaggle项目上下载.解压后都统一存在项目目录的`dataset/`文件夹下,注意看下`.gitignore`有没有把这个文件夹放里面,防止push的时候出问题.
+
++ `dataset/train/`训练集
++ `dataset/test/`测试集
++ `dataset/sample_submission.csv`标注
+
 ## 数据特征
 
 
