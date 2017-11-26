@@ -38,9 +38,9 @@
 + `dataset/test/`测试集
 + `dataset/sample_submission.csv`标注
 
-## 数据特征
+## 文章收集
 
+<https://github.com/NLP-Deeplearning-Club/kaggle-project/wiki/papers>
 
-## 基本思想和算法
 
 
