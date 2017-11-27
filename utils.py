@@ -8,7 +8,7 @@ import tensorflow as tf
 from tensorflow.contrib import layers
 from tensorflow.contrib import signal
 
-DATADIR = './data'  # unzipped train and test data
+DATADIR = './dataset'  # unzipped train and test data
 MODELDIR = './model'  # just a random name
 POSSIBLE_LABELS = 'yes no up down left right on off stop go silence unknown'.split()
 id2name = {i: name for i, name in enumerate(POSSIBLE_LABELS)}
