@@ -12,7 +12,6 @@ def normalization_local(spectrogram):
 
     Returns:
         np.ndarray: - 正态化的音频频谱数据
-
     """
     mean = np.mean(spectrogram, axis=0)
     std = np.std(spectrogram, axis=0)
@@ -28,7 +27,6 @@ def normalization_global(spectrograms):
 
     Returns:
         np.ndarray: - 正态化的音频频谱数据
-
     """
     mean = np.mean(spectrograms.reshape(
         spectrograms.shape[0] * spectrograms.shape[1], spectrograms.shape[2]),
