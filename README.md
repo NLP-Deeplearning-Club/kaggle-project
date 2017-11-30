@@ -28,7 +28,7 @@
 + 使用python3.5/3.6
 + 使用google风格的注释方式
 + 使用autopep8做格式化
-+ 代码统一用tensorflow，keras啥的就不要凑热闹了
++ 原型开发还是用keras来吧...
 
 ## 数据存储位置
 
