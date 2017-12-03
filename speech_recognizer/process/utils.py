@@ -1,6 +1,6 @@
-REGIST_PROCESS = []
+REGIST_PROCESS = {}
 
 
 def regist(func):
-    REGIST_PROCESS.append(func.__name__)
+    REGIST_PROCESS[func.__name__] = func
     return func

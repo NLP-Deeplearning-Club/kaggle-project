@@ -1,6 +1,6 @@
 import sys
 import argparse
-from .command.pretreat import pretreat_command
+from speech_recognizer.command.train import train_command
 
 
 class Command:
@@ -13,7 +13,7 @@ class Command:
             usage='''speech_recognizer.py <command> [<args>]
 
 支持的操作有:
-   pretreat        预处理一段或者一个文件夹下的音频信息,并将其保存到指定文件夹下
+   train        按过程名训练一个模型
 ''')
         parser.add_argument('command', help='Subcommand to run')
 
@@ -26,17 +26,13 @@ class Command:
         # use dispatch pattern to invoke method with same name
         getattr(self, args.command)()
 
-    def pretreat(self):
-        """预处理命令
+    def train(self):
+        """训练命令
         """
         parser = argparse.ArgumentParser(
-            description='预处理一段或者一个文件夹下的音频信息,并将其保存到指定文件夹下')
-        parser.add_argument("path", type=str)
-        parser.add_argument("-o", "--output_dir", type=str, help="用于指定输出的文件夹")
-        parser.add_argument("--toimg", action='store_true', help="用于指定输出的为频谱图")
-        parser.add_argument("--tomfcc", action='store_true',
-                            help="用于指定输出的为mfcc")
-        parser.set_defaults(func=pretreat_command)
+            description='训练一个模型')
+        parser.add_argument("process_name", type=str)
+        parser.set_defaults(func=train_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
 
