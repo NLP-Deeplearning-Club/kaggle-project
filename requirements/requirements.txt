@@ -3,4 +3,4 @@ numpy
 scipy
 scikit-learn
 cython
-librosa
+python_speech_features
