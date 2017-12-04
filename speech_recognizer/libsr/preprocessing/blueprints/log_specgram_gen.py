@@ -1,9 +1,11 @@
 """先进行重采样,再将结果用于计算对数频谱,最后padding后返回频谱数据
 """
-from ..find_record import find_train_data
-from ..resample import resample_from_path
-from ..padding import
 import numpy as np
+from scipy.io import wavfile
+from ..find_record import find_train_data
+from ..resample import resample
+from ..padding import padding_wave
+
 
 ALL_TRAIN_DATA = find_train_data()
 
@@ -22,11 +24,49 @@ def log_spec_gen(batch_size=50):
     while True:
         i = np.random.randint(0, loopcount)
         _X_yield = []
-        for i in X[i * batch_size:(i + 1) * batch_size]:
-            new_sample_rate, resampled = resample_from_path(i)
-            _, _, spec = log_specgram(resampled, new_sample_rate)
-            spec = padding(spec)
-            _X_yield.append(spec)
-        X_yield = np.array(_X_yield)
-        y_yield = y[i * batch_size:(i + 1) * batch_size]
+        _y_yield = []
+        for i, label in zip(X[i * batch_size:(i + 1) * batch_size], y[i * batch_size:(i + 1) * batch_size]):
+            sample_rate, resampled = wavfile.read(i)
+            samples = padding_wave(samples)
+            if len(samples) > 16000:
+                n_samples = chop_audio(samples)
+            else:
+                n_samples = [samples]
+            for samples in n_samples:
+                new_sample_rate, resampled = resample(samples))
+                _, _, specgram=log_specgram(
+                    resampled, sample_rate = new_sample_rate)
+                _X_yield.append(specgram)
+                _y_yield.append(label)
+        X_yield=np.array(_X_yield)
+        y_yield=label_transform(_y_yield)
+        label_index=y_yield.columns.values
+        y_yield=y_yield.values
+        y_yield=np.array(y_yield)
         yield X_yield, y_yield
+
+
+def test_data_generator(batch=16):
+    fpaths = glob(os.path.join(test_data_path, '*wav'))
+    i = 0
+    for path in fpaths:
+        if i == 0:
+            imgs = []
+            fnames = []
+        i += 1
+        rate, samples = wavfile.read(path)
+        samples = pad_audio(samples)
+        resampled = signal.resample(samples, int(new_sample_rate / rate * samples.shape[0]))
+        _, _, specgram = log_specgram(resampled, sample_rate=new_sample_rate)
+        imgs.append(specgram)
+        fnames.append(path.split('\\')[-1])
+        if i == batch:
+            i = 0
+            imgs = np.array(imgs)
+            imgs = imgs.reshape(tuple(list(imgs.shape) + [1]))
+            yield fnames, imgs
+    if i < batch:
+        imgs = np.array(imgs)
+        imgs = imgs.reshape(tuple(list(imgs.shape) + [1]))
+        yield fnames, imgs
+    raise StopIteration()
