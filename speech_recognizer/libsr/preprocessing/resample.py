@@ -16,7 +16,9 @@ def resample(samples, sample_rate, *, new_sample_rate=8000):
         tuple[np.ndarray,np.ndarray]: - 返回结果为重采样后的由频率(一维)和强度(一维)组成的元组
     """
     # int(new_sample_rate / sample_rate * samples.shape[0])
-    resampled = signal.resample(samples, new_sample_rate)
+    resampled = signal.resample(
+        samples,
+        int(new_sample_rate / sample_rate * samples.shape[0]))
     return new_sample_rate, resampled
 
 

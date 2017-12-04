@@ -1,7 +1,12 @@
+"""示范用的测试训练过程
+"""
+
 from pathlib import Path
-from speech_recognizer.libsr.preprocessing import test_train_data_generator, test_test_data_generator
+from speech_recognizer.libsr.preprocessing.blueprints.test_data_gen import (
+    test_train_data_generator,
+    test_test_data_generator)
 from speech_recognizer.libsr.models import test_model
-from speech_recognizer.libsr.train import train, train_generator
+from speech_recognizer.libsr.train import train_generator
 from .utils import regist
 
 
@@ -14,7 +19,8 @@ def test_process():
                                     metrics=['accuracy'])
 
     print("evaluate score:")
-    print(trained_model.evaluate_generator(test_test_data_generator(20), steps=10))
+    print(trained_model.evaluate_generator(
+        test_test_data_generator(20), steps=10))
 
     p = Path(__file__).absolute()
     _dir = p.parent.parent
