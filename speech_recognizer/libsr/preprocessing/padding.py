@@ -1,4 +1,4 @@
-"""
+"""用于加长或者截断音频数据是数据整齐
 """
 import numpy as np
 
@@ -33,7 +33,7 @@ def padding_wave(sample, max_lenght=16000):
     """
     if len(sample) >= max_lenght:
         return sample
-    result = np.pad(samples, pad_width=(L - len(samples), 0),
+    result = np.pad(sample, pad_width=(max_lenght - len(sample), 0),
                     mode='constant', constant_values=(0, 0))
     return result
 
