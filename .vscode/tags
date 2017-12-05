@@ -4,37 +4,35 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-ALL_TRAIN_DATA	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^ALL_TRAIN_DATA = find_train_data()$/;"	kind:variable	line:8
 ALL_TRAIN_DATA	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	/^ALL_TRAIN_DATA = find_train_data()$/;"	kind:variable	line:7
 AUTHOR	../setup.py	/^AUTHOR = '87'$/;"	kind:variable	line:14
 AUTHOR_EMAIL	../setup.py	/^AUTHOR_EMAIL = ''$/;"	kind:variable	line:15
 Activation	../speech_recognizer\libsr\models\test_model.py	/^from keras.layers import Dense, Dropout, Activation$/;"	kind:namespace	line:2
-BatchNormalization	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
+Adam	../speech_recognizer\process\basecnn_process.py	/^from keras.optimizers import Adam$/;"	kind:namespace	line:4
 CLASSIFIERS	../setup.py	/^CLASSIFIERS = [$/;"	kind:variable	line:17
-Command	../speech_recognizer\main.py	/^class Command:$/;"	kind:class	line:6
-Convolution2D	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
-DEFAULT_DATASET_PATH	../speech_recognizer\libsr\preprocessing\find_record.py	/^DEFAULT_DATASET_PATH = Path(__file__).absolute($/;"	kind:variable	line:2
+Command	../speech_recognizer\main.py	/^class Command:$/;"	kind:class	line:7
+DEFAULT_DATASET_PATH	../speech_recognizer\libsr\preprocessing\find_record.py	/^DEFAULT_DATASET_PATH = Path(__file__).absolute($/;"	kind:variable	line:3
 DESCRIPTION	../setup.py	/^DESCRIPTION = 'simple tools'$/;"	kind:variable	line:12
-Dense	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
 Dense	../speech_recognizer\libsr\models\test_model.py	/^from keras.layers import Dense, Dropout, Activation$/;"	kind:namespace	line:2
-Dropout	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
 Dropout	../speech_recognizer\libsr\models\test_model.py	/^from keras.layers import Dense, Dropout, Activation$/;"	kind:namespace	line:2
-Flatten	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
 HERE	../setup.py	/^HERE = path.abspath(path.dirname(__file__))$/;"	kind:variable	line:29
-Input	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
 KEYWORDS	../setup.py	/^KEYWORDS = ("tools",)$/;"	kind:variable	line:25
 LICENSE	../setup.py	/^LICENSE = 'MIT'$/;"	kind:variable	line:16
 LONG_DESCRIPTION	../setup.py	/^    LONG_DESCRIPTION = f.read()$/;"	kind:variable	line:31
-MaxPooling2D	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.layers import Convolution2D, Dense, Input, Flatten, Dropout, MaxPooling2D, BatchNormalization$/;"	kind:namespace	line:2
+Namespace	../speech_recognizer\command\predict.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
+Namespace	../speech_recognizer\command\predict_submit.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
 Namespace	../speech_recognizer\command\train.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
 Options	../setup.py	/^from Cython.Compiler import Options$/;"	kind:namespace	line:5
 PACKAGES	../setup.py	/^PACKAGES = find_packages(exclude=['contrib', 'docs', 'test'])$/;"	kind:variable	line:26
 PROJECTNAME	../setup.py	/^PROJECTNAME = 'speech_recognizer'$/;"	kind:variable	line:10
+Path	../speech_recognizer\command\predict.py	/^from pathlib import Path$/;"	kind:namespace	line:2
 Path	../speech_recognizer\libsr\__init__.py	/^from pathlib import Path$/;"	kind:namespace	line:1
 Path	../speech_recognizer\libsr\preprocessing\find_record.py	/^from pathlib import Path$/;"	kind:namespace	line:1
+Path	../speech_recognizer\process\basecnn_process.py	/^from pathlib import Path$/;"	kind:namespace	line:3
 Path	../speech_recognizer\process\test_process.py	/^from pathlib import Path$/;"	kind:namespace	line:4
+REGIST_PERPROCESS	../speech_recognizer\libsr\preprocessing\blueprints\utils.py	/^REGIST_PERPROCESS = {}$/;"	kind:variable	line:1
 REGIST_PROCESS	../speech_recognizer\command\train.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:2
-REGIST_PROCESS	../speech_recognizer\libsr\__init__.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:3
+REGIST_PROCESS	../speech_recognizer\libsr\__init__.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:4
 REGIST_PROCESS	../speech_recognizer\process\utils.py	/^REGIST_PROCESS = {}$/;"	kind:variable	line:1
 REQUIREMETS	../setup.py	/^    REQUIREMETS = f.readlines()$/;"	kind:variable	line:35
 REQUIREMETS_DEV	../setup.py	/^    REQUIREMETS_DEV = f.readlines()$/;"	kind:variable	line:38
@@ -44,15 +42,16 @@ REQUIREMETS_FILE	../setup.py	/^REQUIREMETS_FILE = 'requirements.txt'$/;"	kind:va
 REQUIREMETS_TEST	../setup.py	/^    REQUIREMETS_TEST = f.readlines()$/;"	kind:variable	line:41
 REQUIREMETS_TEST_FILE	../setup.py	/^REQUIREMETS_TEST_FILE = 'requirements_test.txt'$/;"	kind:variable	line:8
 SGD	../speech_recognizer\libsr\train.py	/^from keras.optimizers import SGD$/;"	kind:namespace	line:1
+Sequential	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.models import Sequential$/;"	kind:namespace	line:2
 Sequential	../speech_recognizer\libsr\models\test_model.py	/^from keras.models import Sequential$/;"	kind:namespace	line:1
 TEST_DATA	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^TEST_DATA = dict(x_train=np.random.random((1000, 20)),$/;"	kind:variable	line:10
 TEST_DATA	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^TEST_DATA = dict(x_train=np.random.random((1000, 20)),$/;"	kind:variable	line:10
-TEST_SET	../speech_recognizer\libsr\preprocessing\find_record.py	/^TEST_SET = "test\/audio"$/;"	kind:variable	line:5
-TRAIN_SET	../speech_recognizer\libsr\preprocessing\find_record.py	/^TRAIN_SET = "train\/audio"$/;"	kind:variable	line:4
+TEST_SET	../speech_recognizer\libsr\preprocessing\find_record.py	/^TEST_SET = "test\/audio"$/;"	kind:variable	line:6
+TRAIN_SET	../speech_recognizer\libsr\preprocessing\find_record.py	/^TRAIN_SET = "train\/audio"$/;"	kind:variable	line:5
 URL	../setup.py	/^URL = ''$/;"	kind:variable	line:13
 VERSION	../setup.py	/^VERSION = '0.0.1'$/;"	kind:variable	line:11
 ZIP_SAFE	../setup.py	/^ZIP_SAFE = False$/;"	kind:variable	line:27
-__init__	../speech_recognizer\main.py	/^    def __init__(self, argv):$/;"	kind:member	line:10
+__init__	../speech_recognizer\main.py	/^    def __init__(self, argv):$/;"	kind:member	line:11
 __init__.py	../speech_recognizer\__init__.py	1;"	kind:file	line:1
 __init__.py	../speech_recognizer\command\__init__.py	1;"	kind:file	line:1
 __init__.py	../speech_recognizer\libsr\__init__.py	1;"	kind:file	line:1
@@ -60,15 +59,20 @@ __init__.py	../speech_recognizer\libsr\models\__init__.py	1;"	kind:file	line:1
 __init__.py	../speech_recognizer\libsr\preprocessing\__init__.py	1;"	kind:file	line:1
 __init__.py	../speech_recognizer\libsr\preprocessing\blueprints\__init__.py	1;"	kind:file	line:1
 __init__.py	../speech_recognizer\process\__init__.py	1;"	kind:file	line:1
+_data_gen	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def _data_gen(data, index_path=None):$/;"	kind:function	line:33
 _get_longest_period	../speech_recognizer\libsr\preprocessing\denoising.py	/^def _get_longest_period(seg_keep_array):$/;"	kind:function	line:27
 _group_consecutives	../speech_recognizer\libsr\preprocessing\denoising.py	/^def _group_consecutives(vals, step=0):$/;"	kind:function	line:12
-_load	../speech_recognizer\libsr\__init__.py	/^def _load(process_name):$/;"	kind:function	line:10
-activations	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import optimizers, losses, activations, models$/;"	kind:namespace	line:1
+_load	../speech_recognizer\libsr\__init__.py	/^def _load(process_name):$/;"	kind:function	line:11
+_load_index	../speech_recognizer\libsr\__init__.py	/^def _load_index(process_name):$/;"	kind:function	line:24
+activations	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import activations$/;"	kind:namespace	line:1
 argparse	../speech_recognizer\main.py	/^import argparse$/;"	kind:namespace	line:2
 author	../setup.py	/^    author=AUTHOR,$/;"	kind:variable	line:55
 author_email	../setup.py	/^    author_email=AUTHOR_EMAIL,$/;"	kind:variable	line:56
+basecnn_gen_process	../speech_recognizer\process\basecnn_process.py	/^def basecnn_gen_process():$/;"	kind:function	line:38
+basecnn_model	../speech_recognizer\libsr\models\__init__.py	/^from .cnn_3_layer import model as basecnn_model/;"	kind:namespace	line:2
+basecnn_model	../speech_recognizer\process\basecnn_process.py	/^from speech_recognizer.libsr.models import basecnn_model$/;"	kind:namespace	line:10
 basecnn_process	../speech_recognizer\process\__init__.py	/^from .basecnn_process import basecnn_process/;"	kind:namespace	line:2
-basecnn_process	../speech_recognizer\process\basecnn_process.py	/^def basecnn_process():$/;"	kind:function	line:8
+basecnn_process	../speech_recognizer\process\basecnn_process.py	/^def basecnn_process():$/;"	kind:function	line:16
 basecnn_process.py	../speech_recognizer\process\basecnn_process.py	1;"	kind:file	line:1
 chop_audio_gen	../speech_recognizer\libsr\preprocessing\padding.py	/^def chop_audio_gen(samples, L=16000, num=20):$/;"	kind:function	line:41
 classifiers	../setup.py	/^    classifiers=CLASSIFIERS,$/;"	kind:variable	line:58
@@ -79,9 +83,6 @@ custom_fft_from_path	../speech_recognizer\libsr\preprocessing\custom_fft.py	/^de
 cythonize	../setup.py	/^from Cython.Build import cythonize$/;"	kind:namespace	line:4
 data_files	../setup.py	/^    data_files=[('requirements', ['requirements\/requirements.txt', 'requirements\/requirements_dev.txt', 'requirements\/requirements_test.txt'])]$/;"	kind:variable	line:70
 denoising.py	../speech_recognizer\libsr\preprocessing\denoising.py	1;"	kind:file	line:1
-dense_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^dense_1 = BatchNormalization()(Dense(128, activation=activations.relu)(dense_1))$/;"	kind:variable	line:24
-dense_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^dense_1 = BatchNormalization()(Dense(128, activation=activations.relu)(img_1))$/;"	kind:variable	line:23
-dense_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^dense_1 = Dense(nclass, activation=activations.softmax)(dense_1)$/;"	kind:variable	line:25
 description	../setup.py	/^    description=DESCRIPTION,$/;"	kind:variable	line:52
 ext_modules	../setup.py	/^    ext_modules=cythonize(extensions),$/;"	kind:variable	line:67
 extensions	../setup.py	/^extensions = [$/;"	kind:variable	line:43
@@ -89,36 +90,31 @@ extras_require	../setup.py	/^    extras_require={$/;"	kind:variable	line:63
 fft	../speech_recognizer\libsr\preprocessing\custom_fft.py	/^from scipy.fftpack import fft$/;"	kind:namespace	line:6
 find_packages	../setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:2
 find_record.py	../speech_recognizer\libsr\preprocessing\find_record.py	1;"	kind:file	line:1
-find_train_data	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..find_record import find_train_data$/;"	kind:namespace	line:3
+find_train_data	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..find_record import find_train_data$/;"	kind:namespace	line:8
 find_train_data	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	/^from ..find_record import find_train_data$/;"	kind:namespace	line:3
-find_train_data	../speech_recognizer\libsr\preprocessing\find_record.py	/^def find_train_data(path_str=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET))):$/;"	kind:function	line:8
-find_train_data	../speech_recognizer\process\basecnn_process.py	/^from speech_recognizer.libsr.preprocessing.find_record import find_train_data$/;"	kind:namespace	line:3
+find_train_data	../speech_recognizer\libsr\preprocessing\find_record.py	/^def find_train_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)), test_rate=0.3):$/;"	kind:function	line:9
+get_train_data	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def get_train_data(index_path):$/;"	kind:function	line:62
 glob	../speech_recognizer\libsr\preprocessing\denoising.py	/^from glob import glob$/;"	kind:namespace	line:7
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Convolution2D(16, kernel_size=3, activation=activations.relu)(img_1)$/;"	kind:variable	line:14
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Convolution2D(16, kernel_size=3, activation=activations.relu)(img_1)$/;"	kind:variable	line:15
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Convolution2D(32, kernel_size=3, activation=activations.relu)(img_1)$/;"	kind:variable	line:18
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Convolution2D(8, kernel_size=2, activation=activations.relu)(img_1)$/;"	kind:variable	line:11
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Convolution2D(8, kernel_size=2, activation=activations.relu)(norm_inp)$/;"	kind:variable	line:10
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Dropout(rate=0.2)(img_1)$/;"	kind:variable	line:13
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Dropout(rate=0.2)(img_1)$/;"	kind:variable	line:17
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Dropout(rate=0.2)(img_1)$/;"	kind:variable	line:20
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = Flatten()(img_1)$/;"	kind:variable	line:21
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = MaxPooling2D(pool_size=(2, 2))(img_1)$/;"	kind:variable	line:12
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = MaxPooling2D(pool_size=(2, 2))(img_1)$/;"	kind:variable	line:16
-img_1	../speech_recognizer\libsr\models\cnn_3_layer.py	/^img_1 = MaxPooling2D(pool_size=(2, 2))(img_1)$/;"	kind:variable	line:19
 include_dirs	../setup.py	/^          include_dirs=[numpy.get_include()],$/;"	kind:variable	line:46
 include_package_data	../setup.py	/^    include_package_data=True,$/;"	kind:variable	line:61
-inp	../speech_recognizer\libsr\models\cnn_3_layer.py	/^inp = Input(shape=input_shape)$/;"	kind:variable	line:8
-input_shape	../speech_recognizer\libsr\models\cnn_3_layer.py	/^input_shape = (99, 81, 1)$/;"	kind:variable	line:6
+input_shape	../speech_recognizer\libsr\models\cnn_3_layer.py	/^input_shape = (99, 81, 1)$/;"	kind:variable	line:12
 install_requires	../setup.py	/^    install_requires=REQUIREMETS,$/;"	kind:variable	line:62
-keras	../speech_recognizer\libsr\models\cnn_3_layer.py	/^import keras$/;"	kind:namespace	line:4
+json	../speech_recognizer\libsr\__init__.py	/^import json$/;"	kind:namespace	line:2
+json	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^import json$/;"	kind:namespace	line:3
 keras	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^import keras$/;"	kind:namespace	line:4
 keras	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^import keras$/;"	kind:namespace	line:4
 keywords	../setup.py	/^    keywords=KEYWORDS,$/;"	kind:variable	line:59
+label_transform	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..label_transform import label_transform$/;"	kind:namespace	line:11
+label_transform	../speech_recognizer\libsr\preprocessing\label_transform.py	/^def label_transform(labels):$/;"	kind:function	line:7
+label_transform.py	../speech_recognizer\libsr\preprocessing\label_transform.py	1;"	kind:file	line:1
 language	../setup.py	/^          language = "c++")$/;"	kind:variable	line:47
 license	../setup.py	/^    license=LICENSE,$/;"	kind:variable	line:57
-load_model	../speech_recognizer\libsr\__init__.py	/^from keras.models import load_model$/;"	kind:namespace	line:2
-log_spec_gen	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def log_spec_gen(batch_size=50):$/;"	kind:function	line:13
+load_model	../speech_recognizer\libsr\__init__.py	/^from keras.models import load_model$/;"	kind:namespace	line:3
+log_spec_perprocess	../speech_recognizer\libsr\preprocessing\blueprints\__init__.py	/^from .log_specgram_gen import log_spec_perprocess$/;"	kind:namespace	line:1
+log_spec_perprocess	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def log_spec_perprocess(path):$/;"	kind:function	line:18
+log_spec_test_gen	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def log_spec_test_gen(batch_size, index_path=None):$/;"	kind:function	line:90
+log_spec_train_gen	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^def log_spec_train_gen(batch_size, index_path):$/;"	kind:function	line:75
+log_specgram	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..log_specgram import log_specgram$/;"	kind:namespace	line:7
 log_specgram	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^from ..log_specgram import log_specgram$/;"	kind:namespace	line:7
 log_specgram	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^from ..log_specgram import log_specgram$/;"	kind:namespace	line:7
 log_specgram	../speech_recognizer\libsr\preprocessing\log_specgram.py	/^def log_specgram(audio, sample_rate, *, window='hann', window_size=20,$/;"	kind:function	line:8
@@ -126,26 +122,23 @@ log_specgram.py	../speech_recognizer\libsr\preprocessing\log_specgram.py	1;"	kin
 log_specgram_from_path	../speech_recognizer\libsr\preprocessing\log_specgram.py	/^def log_specgram_from_path(record_path, *, window='hann', window_size=20,$/;"	kind:function	line:34
 log_specgram_gen.py	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	1;"	kind:file	line:1
 long_description	../setup.py	/^    long_description=LONG_DESCRIPTION,$/;"	kind:variable	line:53
-losses	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import optimizers, losses, activations, models$/;"	kind:namespace	line:1
 lstm_3_layer.py	../speech_recognizer\libsr\models\lstm_3_layer.py	1;"	kind:file	line:1
 main	../main.py	/^    from speech_recognizer.main import main$/;"	kind:namespace	line:6
-main	../speech_recognizer\main.py	/^def main(argv=sys.argv[1:]):$/;"	kind:function	line:40
+main	../speech_recognizer\main.py	/^def main(argv=sys.argv[1:]):$/;"	kind:function	line:54
 main.py	../main.py	1;"	kind:file	line:1
 main.py	../speech_recognizer\main.py	1;"	kind:file	line:1
 mfcc	../speech_recognizer\libsr\preprocessing\mfcc.py	/^def mfcc(audio, sample_rate, **kwargs):$/;"	kind:function	line:6
 mfcc.py	../speech_recognizer\libsr\preprocessing\mfcc.py	1;"	kind:file	line:1
 mfcc_from_path	../speech_recognizer\libsr\preprocessing\mfcc.py	/^def mfcc_from_path(record_path, **kwargs):$/;"	kind:function	line:20
 mfcc_gen.py	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	1;"	kind:file	line:1
-model	../speech_recognizer\libsr\models\cnn_3_layer.py	/^model = models.Model(inputs=inp, outputs=dense_1)/;"	kind:variable	line:27
+model	../speech_recognizer\libsr\models\cnn_3_layer.py	/^model = Sequential()$/;"	kind:variable	line:13
 model	../speech_recognizer\libsr\models\test_model.py	/^model = Sequential()$/;"	kind:variable	line:4
-models	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import optimizers, losses, activations, models$/;"	kind:namespace	line:1
 name	../setup.py	/^    name=PROJECTNAME,$/;"	kind:variable	line:50
-nclass	../speech_recognizer\libsr\models\cnn_3_layer.py	/^nclass = 12$/;"	kind:variable	line:7
-norm_inp	../speech_recognizer\libsr\models\cnn_3_layer.py	/^norm_inp = BatchNormalization()(inp)$/;"	kind:variable	line:9
 normalization.py	../speech_recognizer\libsr\preprocessing\normalization.py	1;"	kind:file	line:1
 normalization_global	../speech_recognizer\libsr\preprocessing\normalization.py	/^def normalization_global(spectrograms):$/;"	kind:function	line:22
 normalization_local	../speech_recognizer\libsr\preprocessing\normalization.py	/^def normalization_local(spectrogram):$/;"	kind:function	line:7
-np	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^import numpy as np$/;"	kind:namespace	line:6
+np	../speech_recognizer\command\predict.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^import numpy as np$/;"	kind:namespace	line:4
 np	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^import numpy as np$/;"	kind:namespace	line:3
 np	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^import numpy as np$/;"	kind:namespace	line:3
 np	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	/^import numpy as np$/;"	kind:namespace	line:5
@@ -157,28 +150,39 @@ np	../speech_recognizer\libsr\preprocessing\normalization.py	/^import numpy as n
 np	../speech_recognizer\libsr\preprocessing\padding.py	/^import numpy as np$/;"	kind:namespace	line:3
 np	../speech_recognizer\libsr\preprocessing\vad.py	/^import numpy as np$/;"	kind:namespace	line:4
 open	../setup.py	/^from codecs import open$/;"	kind:namespace	line:1
-optimizers	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import optimizers, losses, activations, models$/;"	kind:namespace	line:1
 os	../speech_recognizer\libsr\preprocessing\denoising.py	/^import os$/;"	kind:namespace	line:8
 packages	../setup.py	/^    packages=PACKAGES,$/;"	kind:variable	line:60
 padding.py	../speech_recognizer\libsr\preprocessing\padding.py	1;"	kind:file	line:1
 padding_spec	../speech_recognizer\libsr\preprocessing\padding.py	/^def padding_spec(spec, max_lenght=16000):$/;"	kind:function	line:6
+padding_wave	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..padding import padding_wave$/;"	kind:namespace	line:10
 padding_wave	../speech_recognizer\libsr\preprocessing\padding.py	/^def padding_wave(sample, max_lenght=16000):$/;"	kind:function	line:24
 path	../setup.py	/^from os import path$/;"	kind:namespace	line:3
-plot	../speech_recognizer\libsr\__init__.py	/^    def plot(process_name):$/;"	kind:function	line:37
-plot_model	../speech_recognizer\libsr\__init__.py	/^    from keras.utils import plot_model$/;"	kind:namespace	line:5
-plot_model	../speech_recognizer\libsr\__init__.py	/^    plot_model = None$/;"	kind:variable	line:7
-predict	../speech_recognizer\libsr\__init__.py	/^def predict(process_name):$/;"	kind:function	line:22
+pd	../speech_recognizer\libsr\preprocessing\label_transform.py	/^import pandas as pd$/;"	kind:namespace	line:1
+plot	../speech_recognizer\libsr\__init__.py	/^    def plot(process_name):$/;"	kind:function	line:60
+plot_model	../speech_recognizer\libsr\__init__.py	/^    from keras.utils import plot_model$/;"	kind:namespace	line:6
+plot_model	../speech_recognizer\libsr\__init__.py	/^    plot_model = None$/;"	kind:variable	line:8
+predict	../speech_recognizer\command\predict.py	/^from speech_recognizer.libsr import predict$/;"	kind:namespace	line:7
+predict	../speech_recognizer\libsr\__init__.py	/^def predict(process_name, featureset, batch_size=32, verbose=0):$/;"	kind:function	line:39
+predict	../speech_recognizer\main.py	/^    def predict(self):$/;"	kind:member	line:40
+predict.py	../speech_recognizer\command\predict.py	1;"	kind:file	line:1
+predict_command	../speech_recognizer\command\predict.py	/^def predict_command(args: Namespace)->None:$/;"	kind:function	line:10
+predict_command	../speech_recognizer\main.py	/^from speech_recognizer.command.predict import predict_command$/;"	kind:namespace	line:4
+predict_submit.py	../speech_recognizer\command\predict_submit.py	1;"	kind:file	line:1
+predict_submit_command	../speech_recognizer\command\predict_submit.py	/^def predict_submit_command(args: Namespace)->None:$/;"	kind:function	line:9
 python_speech_features	../speech_recognizer\libsr\preprocessing\mfcc.py	/^import python_speech_features$/;"	kind:namespace	line:3
+random	../speech_recognizer\libsr\preprocessing\find_record.py	/^import random$/;"	kind:namespace	line:2
 re	../speech_recognizer\libsr\preprocessing\denoising.py	/^import re$/;"	kind:namespace	line:6
-regist	../speech_recognizer\process\basecnn_process.py	/^from .utils import regist$/;"	kind:namespace	line:4
+regist	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from .utils import regist$/;"	kind:namespace	line:6
+regist	../speech_recognizer\libsr\preprocessing\blueprints\utils.py	/^def regist(func):$/;"	kind:function	line:4
+regist	../speech_recognizer\process\basecnn_process.py	/^from .utils import regist$/;"	kind:namespace	line:12
 regist	../speech_recognizer\process\test_process.py	/^from .utils import regist$/;"	kind:namespace	line:10
 regist	../speech_recognizer\process\utils.py	/^def regist(func):$/;"	kind:function	line:4
 remove_muted	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^from ..vad import remove_muted$/;"	kind:namespace	line:6
 remove_muted	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^from ..vad import remove_muted$/;"	kind:namespace	line:6
 remove_muted	../speech_recognizer\libsr\preprocessing\vad.py	/^def remove_muted(wav, muted_rate=0.05):$/;"	kind:function	line:7
+resample	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..resample import resample$/;"	kind:namespace	line:9
 resample	../speech_recognizer\libsr\preprocessing\resample.py	/^def resample(samples, sample_rate, *, new_sample_rate=8000):$/;"	kind:function	line:7
 resample.py	../speech_recognizer\libsr\preprocessing\resample.py	1;"	kind:file	line:1
-resample_from_path	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from ..resample import resample_from_path$/;"	kind:namespace	line:4
 resample_from_path	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^from ..resample import resample_from_path$/;"	kind:namespace	line:5
 resample_from_path	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^from ..resample import resample_from_path$/;"	kind:namespace	line:5
 resample_from_path	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	/^from ..resample import resample_from_path$/;"	kind:namespace	line:4
@@ -189,11 +193,11 @@ signal	../speech_recognizer\libsr\preprocessing\denoising.py	/^from scipy import
 signal	../speech_recognizer\libsr\preprocessing\log_specgram.py	/^from scipy import signal$/;"	kind:namespace	line:4
 signal	../speech_recognizer\libsr\preprocessing\resample.py	/^from scipy import signal$/;"	kind:namespace	line:4
 sources	../setup.py	/^          sources = ["speech_recognizer\/libspeech_recognizer.pyx"],$/;"	kind:variable	line:45
-summary	../speech_recognizer\libsr\__init__.py	/^def summary(process_name):$/;"	kind:function	line:29
+summary	../speech_recognizer\libsr\__init__.py	/^def summary(process_name):$/;"	kind:function	line:51
 sys	../main.py	/^import sys$/;"	kind:namespace	line:2
 sys	../speech_recognizer\main.py	/^import sys$/;"	kind:namespace	line:1
 test_data_gen.py	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	1;"	kind:file	line:1
-test_model	../speech_recognizer\libsr\models\__init__.py	/^from .test_model import model as test_model/;"	kind:namespace	line:1
+test_model	../speech_recognizer\libsr\models\__init__.py	/^from .test_model import model as test_model$/;"	kind:namespace	line:1
 test_model	../speech_recognizer\process\test_process.py	/^from speech_recognizer.libsr.models import test_model$/;"	kind:namespace	line:8
 test_model.py	../speech_recognizer\libsr\models\test_model.py	1;"	kind:file	line:1
 test_process	../speech_recognizer\process\__init__.py	/^from .test_process import test_process$/;"	kind:namespace	line:1
@@ -204,20 +208,23 @@ test_test_data_generator	../speech_recognizer\libsr\preprocessing\blueprints\tes
 test_train_data_generator	../speech_recognizer\libsr\preprocessing\blueprints\mfcc_gen.py	/^def test_train_data_generator(batch_size):$/;"	kind:function	line:19
 test_train_data_generator	../speech_recognizer\libsr\preprocessing\blueprints\test_data_gen.py	/^def test_train_data_generator(batch_size):$/;"	kind:function	line:19
 train	../speech_recognizer\libsr\train.py	/^def train(model_blueprint, x, y, epochs, batch_size, *,$/;"	kind:function	line:4
-train	../speech_recognizer\main.py	/^    def train(self):$/;"	kind:member	line:29
+train	../speech_recognizer\main.py	/^    def train(self):$/;"	kind:member	line:30
+train	../speech_recognizer\process\basecnn_process.py	/^from speech_recognizer.libsr.train import train, train_generator$/;"	kind:namespace	line:11
 train.py	../speech_recognizer\command\train.py	1;"	kind:file	line:1
 train.py	../speech_recognizer\libsr\train.py	1;"	kind:file	line:1
 train_command	../speech_recognizer\command\train.py	/^def train_command(args: Namespace)->None:$/;"	kind:function	line:5
 train_command	../speech_recognizer\main.py	/^from speech_recognizer.command.train import train_command$/;"	kind:namespace	line:3
 train_generator	../speech_recognizer\libsr\train.py	/^def train_generator(model_blueprint, generator, steps_per_epoch, epochs=1, *,$/;"	kind:function	line:29
+train_generator	../speech_recognizer\process\basecnn_process.py	/^from speech_recognizer.libsr.train import train, train_generator$/;"	kind:namespace	line:11
 train_generator	../speech_recognizer\process\test_process.py	/^from speech_recognizer.libsr.train import train_generator$/;"	kind:namespace	line:9
-train_test_split	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from sklearn.model_selection import train_test_split$/;"	kind:namespace	line:3
 url	../setup.py	/^    url=URL,$/;"	kind:variable	line:54
+utils.py	../speech_recognizer\libsr\preprocessing\blueprints\utils.py	1;"	kind:file	line:1
 utils.py	../speech_recognizer\process\utils.py	1;"	kind:file	line:1
 vad.py	../speech_recognizer\libsr\preprocessing\vad.py	1;"	kind:file	line:1
 version	../setup.py	/^    version=VERSION,$/;"	kind:variable	line:51
 wave_data_gen.py	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	1;"	kind:file	line:1
 wave_gen	../speech_recognizer\libsr\preprocessing\blueprints\wave_data_gen.py	/^def wave_gen(batch_size=50):$/;"	kind:function	line:12
+wavfile	../speech_recognizer\libsr\preprocessing\blueprints\log_specgram_gen.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
 wavfile	../speech_recognizer\libsr\preprocessing\custom_fft.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
 wavfile	../speech_recognizer\libsr\preprocessing\denoising.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:4
 wavfile	../speech_recognizer\libsr\preprocessing\log_specgram.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5

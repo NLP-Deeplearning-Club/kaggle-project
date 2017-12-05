@@ -44,13 +44,15 @@ def basecnn_gen_process():
     lenght = next(train_gen)
     print(lenght)
     trained_model = train_generator(basecnn_model, train_gen,
-                                    steps_per_epoch=lenght, epochs=1,
+                                    steps_per_epoch=lenght, epochs=10,
                                     optimizer=Adam(),
                                     loss='categorical_crossentropy',
-                                    metrics=['accuracy'])
+                                    metrics=['accuracy'],
+                                    verbose=2)
     test_gen = log_spec_test_gen(16)
     steps = next(test_gen)
     print("evaluate score:")
+    print("steps:{steps}".format(setps=steps))
     print(trained_model.evaluate_generator(
         test_gen, steps=steps))
 

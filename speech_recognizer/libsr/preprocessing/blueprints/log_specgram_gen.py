@@ -41,7 +41,7 @@ def _data_gen(data, index_path=None):
     y_yields = label_transform(y)
     label_index = list(y_yields.columns.values)
     if index_path:
-        with open(index_path, "w") as f:
+        with open(str(index_path), "w") as f:
             json.dump(label_index, f)
     y_yields = y_yields.values
     y_yields = np.array(y_yields)
