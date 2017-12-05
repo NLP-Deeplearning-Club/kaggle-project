@@ -9,15 +9,15 @@ import os
 import numpy as np
 
 def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
-    """ Keep only the main voice in wav
+    """ 保留主要的音频而去除噪音
     
     Args:
-        wav: The wav data to be processed, in a numeric series list
-        filter_threshold: Threshold to be considered as no signal
-        seg_length: How long is the segment that we will cut the wav for filtering
+        wav (np.ndarray)         : - 音频数据序列
+        filter_threshold (float) : - 筛选阈值：如果某一段音频的平均值低于最大值乘以这个阈值，我们就认为它是没有声音的
+        seg_length (int)         : - 根据多长来切断音频进行筛选，默认长度是 800
         
     Returns:
-        wav with only the main voice kept
+        np.ndarray : - wav_with_only_main_voice 只包含主要音的音频数据，长度应该是小于输入的音频长度的
     """
     
     # Split wav into segements
@@ -41,8 +41,8 @@ def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
     if end < num_seg -1:
         end = (end+1)
 
-    kept_wav = wav[int(seg_length*start):int(seg_length*end)]
-    return kept_wav
+    wav_with_only_main_voice = wav[int(seg_length*start):int(seg_length*end)]
+    return wav_with_only_main_voice
 
 ##############################################################################
 
