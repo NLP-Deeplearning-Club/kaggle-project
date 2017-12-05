@@ -21,18 +21,7 @@ def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
     """
     
     # Split wav into segements
-    wav_length = wav.shape[0]
-    num_seg = int( full_wav_length / seg_length ) + 1
-
-    indice = 0
-    splitted_wavs = []
-
-    while indice + seg_length <= wav_length:
-        w = wav[indice: indice+seg_length]
-        splitted_wavs.append(w)
-        indice += seg_length
-
-    splitted_wavs = np.array(splitted_wavs)
+    splitted_wavs = _split_by_length(wav, seg_length)
     
     # Compute the avg of all segments
     wavs_mean = []
@@ -54,6 +43,24 @@ def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
 
     kept_wav = wav[int(seg_length*start):int(seg_length*end)]
     return kept_wav
+
+##############################################################################
+
+def _split_by_length(wav, seg_length):
+    """Split the wav by segment length"""
+    
+    wav_length = wav.shape[0]
+    num_seg = int( full_wav_length / seg_length ) + 1
+    
+    indice = 0
+    splitted_wavs = []
+    
+    while indice + seg_length <= wav_length:
+        w = wav[indice: indice+seg_length]
+        splitted_wavs.append(w)
+        indice += seg_length
+
+    return np.array(splitted_wavs)
 
 ##############################################################################
 
