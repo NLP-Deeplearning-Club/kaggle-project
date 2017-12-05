@@ -16,7 +16,7 @@
 
     + `speech_recognizer.libsr.preprocessing`
 
-        定义了数据预处理的基本组件和组合好的预处理过程,组合好的预处理过程在其`__init__.py`中定义
+        定义了数据预处理的基本组件和组合好的预处理过程,组合好的预处理过程在其子模块`blueprints`中定义
 
     + `speech_recognizer.libsr.models`
 
@@ -36,12 +36,27 @@
 
 + `speech_recognizer.serialized_models`
 
-    用于保存已经训练好的模型
+    用于保存已经训练好的模型数据和标签onehot对应数据
 
-## 训练
+## 使用方式
 
+1. 在`speech_recognizer.libsr.preprocessing.blueprints`中新建一个对应的预处理流程,使用的工具可以在`speech_recognizer.libsr.preprocessing`中找了做组合,如果没有想要的可以在对应位置写好方便别人使用.推荐参考`log_specgram_gen.py`的写法使用生成器按batch喂数据到显存以减轻机器负担.需要注意的是需要定义一个以`过程名+perprocess`为名的方法用于提取音频中的信息.这个是为了预测时好用,这个函数需要使用装饰器`regist`装饰,并注册到`__init__.py`中
+
+2. 在`speech_recognizer.libsr.models`中新建一个模型结构模块.推荐使用层次结构,比较直观,可以在其`__init__.py`中注册自己定义的结构,如果这样做的话注意不要命名冲突
+
+3. 在`speech_recognizer.process`中新建一个训练流程模块,主要就是使用什么输入,使用什么模型结构这样的东西,注意要使用装饰器`regist`装饰下过程,而且要将这个过程注册到`__init__.py`中,这样命令行可以找到这个过程.而且
+在最后要使用`.save`将训练好的模型以及使用`json`将标签的对应onehot保存起来,约定保存在`speech_recognizer.serialized_models`下的各自过程名的文件下,模型的命名规则为`过程名+_model.h5`,标签的命名规则为`过程名+_index.json`
+
+4. 在根目录下使用命令行`python main.py train xxxx` 训练流程.
+
+5. 在根目录下使用命令行`python main.py predict xxxx prexxxx path` 预测某段音频的标签
+
+6. 在根目录下使用命令行`python main.py predict_submit xxxx prexxxx path` 预测测试集数据
 
 ### 挑选超参
 
+未实现后续可加
 
-### 预测
+
+
+

@@ -1,6 +1,7 @@
 import sys
 import argparse
 from speech_recognizer.command.train import train_command
+from speech_recognizer.command.predict import predict_command
 
 
 class Command:
@@ -33,6 +34,19 @@ class Command:
             description='训练一个模型')
         parser.add_argument("process_name", type=str)
         parser.set_defaults(func=train_command)
+        args = parser.parse_args(self.argv[1:])
+        args.func(args)
+
+    def predict(self):
+        """预测命令"""
+        parser = argparse.ArgumentParser(
+            description='训练一个模型')
+        parser.add_argument("process_name", type=str)
+        parser.add_argument("preprocess_name", type=str)
+        parser.add_argument("wav_dir_path", type=str)
+        parser.add_argument("--batch_size", type=int, default=32)
+        parser.add_argument("--verbose", type=int, default=0)
+        parser.set_defaults(func=predict_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
 

@@ -14,7 +14,10 @@ from .utils import regist
 
 @regist
 def basecnn_process():
-    X, y = get_train_data()
+    p = Path(__file__).absolute()
+    _dir = p.parent.parent
+    index_path = _dir.joinpath("serialized_models/basecnn_process_index.json")
+    X, y = get_train_data(str(index_path))
     print(X.shape)
     print(y.shape)
     trained_model = train(basecnn_model, X, y, 1, 16,
@@ -27,18 +30,21 @@ def basecnn_process():
     print(trained_model.evaluate_generator(
         test_gen, steps=steps))
 
-    p = Path(__file__).absolute()
-    _dir = p.parent.parent
     path = _dir.joinpath("serialized_models/basecnn_process_model.h5")
     trained_model.save(str(path))
 
 
 @regist
 def basecnn_gen_process():
-    train_gen = log_spec_train_gen(16)
+    p = Path(__file__).absolute()
+    _dir = p.parent.parent
+    index_path = _dir.joinpath(
+        "serialized_models/basecnn_gen_process_index.json")
+    train_gen = log_spec_train_gen(16, index_path)
     lenght = next(train_gen)
     print(lenght)
-    trained_model = train_generator(basecnn_model, train_gen, steps_per_epoch=lenght, epochs=1,
+    trained_model = train_generator(basecnn_model, train_gen,
+                                    steps_per_epoch=lenght, epochs=1,
                                     optimizer=Adam(),
                                     loss='categorical_crossentropy',
                                     metrics=['accuracy'])
@@ -48,7 +54,5 @@ def basecnn_gen_process():
     print(trained_model.evaluate_generator(
         test_gen, steps=steps))
 
-    p = Path(__file__).absolute()
-    _dir = p.parent.parent
     path = _dir.joinpath("serialized_models/basecnn_gen_process_model.h5")
     trained_model.save(str(path))
