@@ -1,4 +1,3 @@
-
 import utils
 import os
 import tensorflow as tf
