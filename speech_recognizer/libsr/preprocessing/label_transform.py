@@ -23,5 +23,4 @@ def label_transform(labels):
             nlabels.append(label)
     #nlabels = sorted(nlabels)
     table = pd.get_dummies(pd.Series(nlabels))
-    table.to_excel("labs.xlsx")
     return table

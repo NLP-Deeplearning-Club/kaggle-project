@@ -47,8 +47,7 @@ def basecnn_gen_process():
                                     steps_per_epoch=lenght, epochs=10,
                                     optimizer=Adam(),
                                     loss='categorical_crossentropy',
-                                    metrics=['accuracy'],
-                                    verbose=2)
+                                    metrics=['accuracy'])
     test_gen = log_spec_test_gen(16)
     steps = next(test_gen)
     print("evaluate score:")

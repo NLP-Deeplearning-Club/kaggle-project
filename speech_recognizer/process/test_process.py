@@ -1,6 +1,5 @@
 """示范用的测试训练过程
 """
-
 from pathlib import Path
 from speech_recognizer.libsr.preprocessing.blueprints.test_data_gen import (
     test_train_data_generator,
