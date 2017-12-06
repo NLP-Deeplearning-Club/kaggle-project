@@ -16,7 +16,7 @@ def remove_muted(wav, muted_rate=0.05):
     """
     max_voice = wav.max()
     threshold = max_voice * muted_rate
-    keep_wav = np.array(np.absolute(wav)>threshold)
+    keep_wav = np.array(np.absolute(wav) > threshold)
     reverse_keep_wav = np.flip(keep_wav, 0)
     start = list(keep_wav).index(True)
     end = wav.size - list(reverse_keep_wav).index(True)

@@ -3,6 +3,8 @@ import argparse
 from speech_recognizer.command.train import train_command
 from speech_recognizer.command.predict import predict_command
 from speech_recognizer.command.predict_submit import predict_submit_command
+from speech_recognizer.process.utils import REGIST_PROCESS
+
 
 class Command:
     """用于管理所有命令行操作指令的类
@@ -33,7 +35,8 @@ class Command:
         """训练命令
         """
         parser = argparse.ArgumentParser(
-            description='训练一个模型')
+            description='训练一个模型,可选的有:{}'.format(",".join(
+                list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
         parser.set_defaults(func=train_command)
         args = parser.parse_args(self.argv[1:])
@@ -42,9 +45,10 @@ class Command:
     def predict(self):
         """预测命令"""
         parser = argparse.ArgumentParser(
-            description='训练一个模型')
+            description='''使用指定的模型和预处理过程预测一个文件夹下的音频,
+可选的模型有:{}'''.format(",".join(
+                list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
-        parser.add_argument("preprocess_name", type=str)
         parser.add_argument("wav_dir_path", type=str)
         parser.add_argument("--batch_size", type=int, default=32)
         parser.add_argument("--verbose", type=int, default=0)
@@ -57,7 +61,6 @@ class Command:
         parser = argparse.ArgumentParser(
             description='训练一个模型')
         parser.add_argument("process_name", type=str)
-        parser.add_argument("preprocess_name", type=str)
         parser.add_argument("--batch_size", type=int, default=32)
         parser.add_argument("--verbose", type=int, default=0)
         parser.set_defaults(func=predict_submit_command)

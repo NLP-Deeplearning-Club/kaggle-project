@@ -1,13 +1,6 @@
 """去噪音模块
 """
 
-from scipy.io import wavfile
-from scipy import signal
-import re
-from glob import glob
-import os
-import numpy as np
-
 
 def _group_consecutives(vals, step=0):
     """Return list of consecutive lists of numbers from vals (number list)."""

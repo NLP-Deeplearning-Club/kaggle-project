@@ -6,7 +6,8 @@ TRAIN_SET = "train/audio"
 TEST_SET = "test/audio"
 
 
-def find_train_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)), test_rate=0.3):
+def find_train_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
+                    test_rate=0.3):
     """
     将训练集中的数据找出.并按比例分配为训练集和测试集.注意每一种标签都按这个比例抽样而非总体抽样
 

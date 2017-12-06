@@ -21,6 +21,5 @@ def label_transform(labels):
             nlabels.append('unknown')
         else:
             nlabels.append(label)
-    #nlabels = sorted(nlabels)
     table = pd.get_dummies(pd.Series(nlabels))
     return table

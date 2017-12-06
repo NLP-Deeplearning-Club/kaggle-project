@@ -49,6 +49,6 @@ def chop_audio_gen(samples, L=16000, num=20):
     Yield:
         np.ndarray: - 返回结果为chop后的波形强度数据
     """
-    for i in range(num):
+    for _ in range(num):
         beg = np.random.randint(0, len(samples) - L)
         yield samples[beg: beg + L]

@@ -1,2 +1,1 @@
-from .test_process import test_process
-from .basecnn_process import basecnn_gen_process
+from .cnn_spec_process import cnn_spec_gen_process

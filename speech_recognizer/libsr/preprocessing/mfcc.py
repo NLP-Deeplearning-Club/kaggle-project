@@ -1,4 +1,3 @@
-import numpy as np
 from scipy.io import wavfile
 import python_speech_features
 
@@ -27,4 +26,4 @@ def mfcc_from_path(record_path, **kwargs):
         np.ndarray: - mfcc强度(二维)组成的元组,shape为(times.shape,numcep)
     """
     sample_rate, samples = wavfile.read(str(record_path))
-    return mfcc(samples, sample_rate,**kwargs)
+    return mfcc(samples, sample_rate, **kwargs)
