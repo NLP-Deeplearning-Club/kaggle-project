@@ -1,3 +1,6 @@
+DATADIR = '/media/enroutelab/sdd/data/tensorflow_speech_dataset_kaggle' # unzipped train and test data
+MODELDIR = '/media/enroutelab/sdd/mycodes/TensorflowSpeechRecognitionChallenge/logs01' # just a random name
+
 import os
 import re
 from glob import glob
@@ -8,12 +11,10 @@ import tensorflow as tf
 from tensorflow.contrib import layers
 from tensorflow.contrib import signal
 
-DATADIR = './dataset'  # unzipped train and test data
-MODELDIR = './model'  # just a random name
+
 POSSIBLE_LABELS = 'yes no up down left right on off stop go silence unknown'.split()
 id2name = {i: name for i, name in enumerate(POSSIBLE_LABELS)}
 name2id = {name: i for i, name in id2name.items()}
-
 
 def load_data(data_dir):
     pattern = re.compile("(.+\/)?(\w+)\/([^_]+)_.+wav")
@@ -49,7 +50,6 @@ def load_data(data_dir):
     print('There are {} train and {} val samples'.format(len(train), len(val)))
     return train, val
 
-
 def data_generator(data, params, mode='train'):
     def generator():
         if mode == 'train':
@@ -68,7 +68,7 @@ def data_generator(data, params, mode='train'):
                 # let's generate more silence!
                 samples_per_file = 1 if label_id != name2id['silence'] else 20
                 for _ in range(samples_per_file):
-                    if len(wav) > L:  # if > L, choose randomly the start point
+                    if len(wav) > L: # if > L, choose randomly the start point
                         begin = np.random.randint(0, len(wav) - L)
                     else:
                         begin = 0
@@ -77,7 +77,6 @@ def data_generator(data, params, mode='train'):
                 print(err, label_id, uid, fname)
 
     return generator
-
 
 def test_data_generator():
     def generator():
@@ -89,8 +88,6 @@ def test_data_generator():
     return generator
 
 # ------------NEURALNET STRUCTURE--------------------
-
-
 def baseline(x, params, is_training):
     x = layers.batch_norm(x, is_training=is_training)
     for i in range(4):
@@ -112,7 +109,6 @@ def baseline(x, params, is_training):
     logits = layers.conv2d(x, params.num_classes, 1, 1, activation_fn=None)
     return tf.squeeze(logits, [1, 2])
 
-
 def model_handler(features, labels, mode, params, config):
     # I'm really like to use make_template instead of variable_scopes and re-usage
     extractor = tf.make_template('extractor', baseline, create_scope_now_=True)
@@ -121,25 +117,22 @@ def model_handler(features, labels, mode, params, config):
     # we want to compute spectograms by means of short time fourier transform:
     specgram = signal.stft(
         wav,
-        # 16000 [samples per second] * 0.025 [s] -- default stft window frame
-        400,
+        400,  # 16000 [samples per second] * 0.025 [s] -- default stft window frame
         160,  # 16000 * 0.010 -- default stride
     )
     # specgram is a complex tensor, so split it into phase and amp parts:
     phase = tf.angle(specgram) / np.pi
     # log(1 + abs) is a default transformation for energy units
     amp = tf.log1p(tf.abs(specgram))
-
-    x = tf.stack([amp, phase], axis=3)  # shape is [bs, time, freq_bins, 2]
+    
+    x = tf.stack([amp, phase], axis=3) # shape is [bs, time, freq_bins, 2]
     x = tf.to_float(x)  # we want to have float32, not float64
 
     logits = extractor(x, params, mode == tf.estimator.ModeKeys.TRAIN)
 
     if mode == tf.estimator.ModeKeys.TRAIN:
-        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(
-            labels=labels, logits=logits))
+        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits=logits))
         # some lr tuner, you could use move interesting functions
-
         def learning_rate_decay_fn(learning_rate, global_step):
             return tf.train.exponential_decay(learning_rate, global_step, decay_steps=10000, decay_rate=0.99)
 
@@ -147,28 +140,26 @@ def model_handler(features, labels, mode, params, config):
             loss=loss,
             global_step=tf.contrib.framework.get_global_step(),
             learning_rate=params.learning_rate,
-            optimizer=lambda lr: tf.train.MomentumOptimizer(
-                lr, 0.9, use_nesterov=True),
+            optimizer=lambda lr: tf.train.MomentumOptimizer(lr, 0.9, use_nesterov=True),
             learning_rate_decay_fn=learning_rate_decay_fn,
             clip_gradients=params.clip_gradients,
             variables=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES))
+        
         specs = dict(mode=mode, loss=loss, train_op=train_op)
 
     if mode == tf.estimator.ModeKeys.EVAL:
         prediction = tf.argmax(logits, axis=-1)
-        acc, acc_op = tf.metrics.mean_per_class_accuracy(
-            labels, prediction, params.num_classes)
-        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(
-            labels=labels, logits=logits))
-        specs = dict(mode=mode, loss=loss,
-                     eval_metric_ops=dict(acc=(acc, acc_op)))
+        acc, acc_op = tf.metrics.mean_per_class_accuracy(labels, prediction, params.num_classes)
+        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits=logits))
+        
+        specs = dict(mode=mode, loss=loss, eval_metric_ops=dict(acc=(acc, acc_op)))
 
     if mode == tf.estimator.ModeKeys.PREDICT:
         predictions = {
-            # for probability just take tf.nn.softmax()
-            'label': tf.argmax(logits, axis=-1),
-            'sample': features['sample'],  # it's a hack for simplicity
+            'label': tf.argmax(logits, axis=-1),  # for probability just take tf.nn.softmax()
+            'sample': features['sample'], # it's a hack for simplicity
         }
+        
         specs = dict(mode=mode, predictions=predictions)
 
     return tf.estimator.EstimatorSpec(**specs)
