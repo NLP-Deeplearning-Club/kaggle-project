@@ -50,10 +50,9 @@ def _data_gen(data, index_path=None):
         if flag >= ylen:
             flag = 0
             continue
-        try:
-            X_yield = log_spec_perprocess(X[flag])
-        except:
-            continue
+        
+        X_yield = log_spec_perprocess(X[flag])
+        
         y_yield = y_yields[flag]
         yield X_yield, y_yield
         flag += 1

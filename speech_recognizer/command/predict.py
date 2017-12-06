@@ -15,5 +15,4 @@ def predict_command(args: Namespace)->None:
     XX = [(i.name, preprocess(str(i.absolute()))) for i in p.iterdir()]
     X = np.array([i for _, i in XX])
     pre = predict(args.process_name, X, args.batch_size, args.verbose)
-    #list(zip([i for i, _ in XX], pre))
     print(list(zip([i for i, _ in XX], pre)))

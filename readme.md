@@ -51,7 +51,7 @@
 
 5. 在根目录下使用命令行`python main.py predict xxxx prexxxx path` 预测某段音频的标签
 
-6. 在根目录下使用命令行`python main.py predict_submit xxxx prexxxx path` 预测测试集数据
+6. 在根目录下使用命令行`python main.py predict_submit xxxx prexxxx` 预测测试集数据
 
 ### 挑选超参
 

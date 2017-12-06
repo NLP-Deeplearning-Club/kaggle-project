@@ -2,7 +2,7 @@ import sys
 import argparse
 from speech_recognizer.command.train import train_command
 from speech_recognizer.command.predict import predict_command
-
+from speech_recognizer.command.predict_submit import predict_submit_command
 
 class Command:
     """用于管理所有命令行操作指令的类
@@ -14,7 +14,9 @@ class Command:
             usage='''speech_recognizer.py <command> [<args>]
 
 支持的操作有:
-   train        按过程名训练一个模型
+   train             按过程名训练一个模型
+   predict           按过程名,预处理过程名以及要预测的音频所在文件夹预测种类
+   predict_submit    预测测试集中的数据,并生成提交用的csv文件
 ''')
         parser.add_argument('command', help='Subcommand to run')
 
@@ -47,6 +49,18 @@ class Command:
         parser.add_argument("--batch_size", type=int, default=32)
         parser.add_argument("--verbose", type=int, default=0)
         parser.set_defaults(func=predict_command)
+        args = parser.parse_args(self.argv[1:])
+        args.func(args)
+
+    def predict_submit(self):
+        """预测命令"""
+        parser = argparse.ArgumentParser(
+            description='训练一个模型')
+        parser.add_argument("process_name", type=str)
+        parser.add_argument("preprocess_name", type=str)
+        parser.add_argument("--batch_size", type=int, default=32)
+        parser.add_argument("--verbose", type=int, default=0)
+        parser.set_defaults(func=predict_submit_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
 
