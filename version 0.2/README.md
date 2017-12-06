@@ -59,7 +59,7 @@ INFO:tensorflow:Confusion Matrix:
  [  0   2   1   0   7   1   2   0   0   2 234   0]
  [  0  14   0  27   4   4   5   2   0   0   1 194]]
 INFO:tensorflow:Final test accuracy = 88.4% (N=3081)
-
+```
 ## Result running on Rasperrypi3
 ```
 rk@rk:~/Desktop/benchmark_tensorflow$ ./benchmark_model --graph=my_frozen_graph.pb --input_layer="decoded_sample_data:0,decoded_sample_data:1" --input_layer_shape="16000,1:" --input_layer_type="float,int32" --input_layer_values=":16000" --output_layer="labels_softmax:0" --show_run_order=true --show_time=true --show_memory=true --show_summary=true --show_flops=true
