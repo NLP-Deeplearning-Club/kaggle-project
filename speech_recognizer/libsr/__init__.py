@@ -2,7 +2,8 @@ from pathlib import Path
 import json
 from keras.models import load_model
 from speech_recognizer.process.utils import REGIST_PROCESS
-try:
+try: 
+    import pydot
     from keras.utils import plot_model
 except:
     plot_model = None
@@ -62,4 +63,9 @@ if plot_model is not None:
             model = _load(process_name)
         else:
             model = process_name
-        return plot_model(model, to_file='model.png')
+        try:
+            plot_model(model, to_file='model.png')
+        except:
+            raise
+else:
+    plot = None

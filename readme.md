@@ -24,7 +24,12 @@
 
 + `speech_recognizer.process`
 
-    用于定义训练过程,也就是如何组合`speech_recognizer.libsr`中定义的方法
+    用于定义训练过程,也就是如何组合`speech_recognizer.libsr`中定义的方法,其中的`utils.py`中定义了几个实用的对象:
+
+    + `REGIST_PROCESS/REGIST_PERPROCESS`用于保存被注册的训练过程和特征提取过程
+    + `tb_cb`预定义好的tensorboard回调函数对象
+    + `get_current_function_name`用于获取当前所在函数函数名的函数,用于统一模型的命名
+    + `regist`将过程,特征提取过程绑定在`REGIST_PROCESS/REGIST_PERPROCESS`中的装饰器
 
 + `speech_recognizer.command`
 
@@ -46,7 +51,7 @@
 
 2. 在`speech_recognizer.libsr.models`中新建一个模型结构模块.推荐使用层次结构,比较直观,可以在其`__init__.py`中注册自己定义的结构,如果这样做的话注意不要命名冲突
 
-3. 在`speech_recognizer.process`中新建一个训练流程模块,主要就是使用什么输入,使用什么模型结构这样的东西,注意要使用装饰器`regist(预处理流程)`装饰下过程,而且要将这个过程注册到`__init__.py`中,这样命令行可以找到这个过程.而且
+3. 在`speech_recognizer.process`中新建一个训练流程模块,主要就是使用什么输入,使用什么模型结构这样的东西,注意要使用装饰器`regist(预处理流程函数对象)`装饰下过程,而且要将这个过程注册到`__init__.py`中,这样命令行可以找到这个过程.而且
 在最后要使用`.save`将训练好的模型以及使用`json`将标签的对应onehot保存起来,约定保存在`speech_recognizer.serialized_models`下的各自过程名的文件下,模型的命名规则为`过程名+_model.h5`,标签的命名规则为`过程名+_index.json`
 
 4. 在根目录下使用命令行`python main.py train xxxx` 训练流程.

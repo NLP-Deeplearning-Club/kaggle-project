@@ -1,6 +1,69 @@
 """去噪音模块
 """
 
+from scipy.io import wavfile
+from scipy import signal
+import re
+from glob import glob
+import os
+import numpy as np
+
+
+def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
+    """ 保留主要的音频而去除噪音
+
+    Args:
+        wav (np.ndarray)         : - 音频数据序列
+        filter_threshold (float) : - 筛选阈值：如果某一段音频的平均值低于最大值乘以这个阈值，我们就认为它是没有声音的
+        seg_length (int)         : - 根据多长来切断音频进行筛选，默认长度是 800
+
+    Returns:
+        np.ndarray : - wav_with_only_main_voice 只包含主要音的音频数据，长度应该是小于输入的音频长度的
+    """
+
+    # Split wav into segements
+    splitted_wavs = _split_by_length(wav, seg_length)
+
+    # Compute the avg of all segments
+    wavs_mean = []
+    for sw in splitted_wavs:
+        wavs_mean.append(np.absolute(sw).mean())
+    wavs_mean = np.array(wavs_mean)
+
+    # Check if each segments will be kept or not
+    # seg_keep_array : [1 0 1 1 0 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0]
+    seg_keep_array = (wavs_mean > filter_threshold *
+                      wavs_mean.max()).astype(int)
+
+    # Find the longgest keep period
+    # [1 0 1 1 0 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0] -> 5, 8 (longest continunous 1)
+    start, end = _get_longest_period(seg_keep_array)
+    if start > 1:
+        start = (start - 1)
+    if end < num_seg - 1:
+        end = (end + 1)
+
+    wav_with_only_main_voice = wav[int(
+        seg_length * start):int(seg_length * end)]
+    return wav_with_only_main_voice
+
+
+def _split_by_length(wav, seg_length):
+    """Split the wav by segment length"""
+
+    wav_length = wav.shape[0]
+    num_seg = int(full_wav_length / seg_length) + 1
+
+    indice = 0
+    splitted_wavs = []
+
+    while indice + seg_length <= wav_length:
+        w = wav[indice: indice + seg_length]
+        splitted_wavs.append(w)
+        indice += seg_length
+
+    return np.array(splitted_wavs)
+
 
 def _group_consecutives(vals, step=0):
     """Return list of consecutive lists of numbers from vals (number list)."""
@@ -28,47 +91,3 @@ def _get_longest_period(seg_keep_array):
             start += len(cons_wav[i])
         end += len(cons_wav[i])
     return start, end
-
-
-# def get_main_voice(wav, *,filter_threshold=0.1, window=num_seg):
-#     """用于获取主干声音部分
-
-#     Parameters:
-#         wav (np.ndarray): - 指明音频的振幅序列
-#         filter_threshold (float): - 过滤器的阈值
-#         window (int): - 窗口大小,单位为采样次数(以8000hz为例,10ms窗口就是80)
-#         num_seg (int): 
-
-#     Returns:
-#         np.ndarray: - 主干波形
-#     """
-#     """ Keep only the main voice in wav
-
-#     Args:
-#         wav: The wav data to be processed, in a numeric series list
-#         filter_threshold: Threshold to be considered as no signal
-#         num_seg: How many segments we will cut the wav for filtering
-
-#     Returns:
-#         wav with only the main voice kept
-#     """
-
-#     wav = signal.resample(wav, 16000)
-#     seg_length = 16000 / num_seg
-#     splitted_wavs = np.split(wav, num_seg)
-#     wavs_mean = []
-#     for sw in splitted_wavs:
-#         wavs_mean.append(np.absolute(sw).mean())
-#     wavs_mean = np.array(wavs_mean)
-#     seg_keep_array = (wavs_mean > 0.1 * wavs_mean.max()).astype(int)
-
-#     # Find the longgest keep period
-#     # [1 0 1 1 0 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0] -> 5, 8 (longest continunous 1)
-#     start, end = _get_longest_period(seg_keep_array)
-#     if start > 1:
-#         start = (start - 1)
-#     if end < num_seg - 1:
-#         end = (end + 1)
-
-#     keeped_wav = wav[int(seg_length * start):int(seg_length * end)]
-#     return keeped_wav

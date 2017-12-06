@@ -54,7 +54,7 @@ def predict_submit_command(args: Namespace)->None:
     with open(str(p_save), 'w') as fout:
         fout.write('fname,label\n')
         with tqdm(total=lenght) as schedule:
-            batch_size = 3000
+            batch_size = args.size
             gen = test_data_gen(args.process_name, batch_size)
             for names, X in gen:
                 labels = predict(args.process_name, X,
