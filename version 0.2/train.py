@@ -373,7 +373,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--how_many_training_steps',
       type=str,
-      default='15000,3000',
+      default='15000,3000,3000',
       help='How many training loops to run',)
   parser.add_argument(
       '--eval_step_interval',
@@ -383,7 +383,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--learning_rate',
       type=str,
-      default='0.001,0.0001',
+      default='0.001,0.0001,0.00001',
       help='How large a learning rate to use when training.')
   parser.add_argument(
       '--batch_size',
@@ -393,7 +393,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--summaries_dir',
       type=str,
-      default='/media/enroutelab/sdd/mycodes/TensorflowSpeechRecognitionChallenge/logs02/tensorboard',
+      default='/media/enroutelab/sdd/mycodes/kaggle-project/logs02/tensorboard',
       help='Where to save summary logs for TensorBoard.')
   parser.add_argument(
       '--wanted_words',
@@ -403,7 +403,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--train_dir',
       type=str,
-      default='/media/enroutelab/sdd/mycodes/TensorflowSpeechRecognitionChallenge/logs02/',
+      default='/media/enroutelab/sdd/mycodes/kaggle-project/logs02/',
       help='Directory to write event logs and checkpoint.')
   parser.add_argument(
       '--save_step_interval',

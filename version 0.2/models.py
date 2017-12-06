@@ -216,8 +216,8 @@ def create_conv_model(fingerprint_input, model_settings, is_training):
   input_time_size = model_settings['spectrogram_length']
   fingerprint_4d = tf.reshape(fingerprint_input,
                               [-1, input_time_size, input_frequency_size, 1])
-  first_filter_width = 8
   first_filter_height = 20
+  first_filter_width = 8
   first_filter_count = 64
   first_weights = tf.Variable(
       tf.truncated_normal(
@@ -232,8 +232,8 @@ def create_conv_model(fingerprint_input, model_settings, is_training):
   else:
     first_dropout = first_relu
   max_pool = tf.nn.max_pool(first_dropout, [1, 2, 2, 1], [1, 2, 2, 1], 'SAME')
-  second_filter_width = 4
   second_filter_height = 10
+  second_filter_width = 4
   second_filter_count = 64
   second_weights = tf.Variable(
       tf.truncated_normal(
