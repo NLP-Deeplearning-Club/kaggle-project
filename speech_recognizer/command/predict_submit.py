@@ -10,6 +10,17 @@ from speech_recognizer.libsr import predict
 
 
 def test_data_gen(process_name, batch_size=200):
+    """根据不同的过程名将数据在迭代器中进行对应的预处理从而减小内存消耗,之后再整合后按batch长度输出.从而减小内存压力.
+    第一个next会返回batch_size下需要多少个迭代才能将测试集的数据遍历一遍.
+
+    Parameters:
+        process_name (str): - 寻找过程对应预处理过程的字段
+        batch_size (int): - 测试数据每个batch长度
+
+    yield:
+        tuple[list,np.ndarray]: - 由文件名组(batch_size*1维)和特征组(batch_size*n维)组成的元组,\
+        特征维数要看预处理是怎么做的
+    """
     p = Path(__file__).absolute().parent.parent.parent.joinpath(
         "dataset/test/audio")
     preprocess = REGIST_PERPROCESS.get(process_name)

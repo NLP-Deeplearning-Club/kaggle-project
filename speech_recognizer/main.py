@@ -4,7 +4,7 @@ from speech_recognizer.command.train import train_command
 from speech_recognizer.command.predict import predict_command
 from speech_recognizer.command.predict_submit import predict_submit_command
 from speech_recognizer.command.summary import summary_command
-from speech_recognizer.command.plot import plot_command
+from speech_recognizer.command.tf_board import tf_board_command
 from speech_recognizer.process.utils import REGIST_PROCESS
 
 
@@ -22,6 +22,7 @@ class Command:
    predict           按过程名,预处理过程名以及要预测的音频所在文件夹预测种类
    predict_submit    预测测试集中的数据,并生成提交用的csv文件
    summary           指定的训练过程输出模型结构
+   tf_board          指定训练过程打开其tensorboard以作监控
 
 ''')
         parser.add_argument('command', help='Subcommand to run')
@@ -36,12 +37,13 @@ class Command:
         getattr(self, args.command)()
 
     def train(self):
-        """训练命令
+        """训练命令,
         """
         parser = argparse.ArgumentParser(
-            description='训练一个模型,可选的有:{}'.format(",".join(
+            description='训练一个模型,可以使用-b标识是否要使用tensorboard可选的有:{}'.format(",".join(
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
+        parser.add_argument("-b", "--tf_board", action="store_true")
         parser.set_defaults(func=train_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
@@ -84,13 +86,12 @@ class Command:
         args = parser.parse_args(self.argv[1:])
         args.func(args)
 
-    def plot(self):
+    def tf_board(self):
         parser = argparse.ArgumentParser(
-            description='''指定的训练过程输出模型结构图像
-可选的模型有:{}'''.format(",".join(
+            description='监控一个模型的训练,可选的有:{}'.format(",".join(
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
-        parser.set_defaults(func=plot_command)
+        parser.set_defaults(func=tf_board_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
 

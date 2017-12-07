@@ -2,14 +2,19 @@ from pathlib import Path
 import json
 from keras.models import load_model
 from speech_recognizer.process.utils import REGIST_PROCESS
-try: 
-    import pydot
-    from keras.utils import plot_model
-except:
-    plot_model = None
 
 
 def _load(process_name):
+    """使用process_name找到对应的模型对象
+    Parameters:
+        process_name (str): - 过程函数名
+
+    Raise:
+        AttributeError : - 如果过程名不在册,或者默认路径不存在,则抛出异常
+
+    Return:
+        (model): process_name对应的模型
+    """
     if process_name not in REGIST_PROCESS:
         raise AttributeError("unknown process name!")
     p = Path(__file__).absolute()
@@ -38,6 +43,17 @@ def _load_index(process_name):
 
 
 def predict(process_name, featureset, batch_size=32, verbose=0):
+    """指定过程名和特征集预测标签
+
+    Parameters:
+        process_name (str): - 过程函数名,确定用什么模型进行预测
+        featureset (np.ndarray)：- 由经过预处理后的特征组成的集合
+        batch_size (int): - 每次训练一个batch,这个batch的大小
+        verbose (int): - 预测执行时的log可见度
+
+    Return:
+        (List[Tuple[label,probability]]): 由featureset长度个(最大可能性标签,最大可能性)对组成的list
+    """
     if isinstance(process_name, str):
         model = _load(process_name)
     else:
@@ -50,22 +66,16 @@ def predict(process_name, featureset, batch_size=32, verbose=0):
 
 
 def summary(process_name):
+    """指定过程名获取其summary信息
+
+    Parameters:
+        process_name (str): - 过程函数名
+
+    Return:
+        model.summary: - 模型的summary信息
+    """
     if isinstance(process_name, str):
         model = _load(process_name)
     else:
         model = process_name
     return model.summary()
-
-
-if plot_model is not None:
-    def plot(process_name):
-        if isinstance(process_name, str):
-            model = _load(process_name)
-        else:
-            model = process_name
-        try:
-            plot_model(model, to_file='model.png')
-        except:
-            raise
-else:
-    plot = None
