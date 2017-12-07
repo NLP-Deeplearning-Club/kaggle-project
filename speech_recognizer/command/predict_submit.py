@@ -8,6 +8,9 @@ from speech_recognizer.process.utils import (
 )
 from speech_recognizer.libsr import predict
 
+LABEL_LIST = ['yes', 'no', 'up', 'down', 'left',
+              'right', 'on', 'off', 'stop', 'go', 'silence']
+
 
 def test_data_gen(process_name, batch_size=200):
     """根据不同的过程名将数据在迭代器中进行对应的预处理从而减小内存消耗,之后再整合后按batch长度输出.从而减小内存压力.
@@ -70,6 +73,9 @@ def predict_submit_command(args: Namespace)->None:
             for names, X in gen:
                 labels = predict(args.process_name, X,
                                  args.batch_size, args.verbose)
-                for fname, label in zip(names, (lab for lab, _ in labels)):
+                for fname, label in zip(
+                        names,
+                        ((lab if lab in LABEL_LIST else "unknown") 
+                            for lab, _ in labels)):
                     fout.write('{},{}\n'.format(fname, label))
                     schedule.update(1)
