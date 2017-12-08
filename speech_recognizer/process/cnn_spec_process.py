@@ -16,7 +16,7 @@ from speech_recognizer.libsr.preprocessing.blueprints import (
     log_spec_train_gen,
     log_spec_validation_gen,
 )
-from speech_recognizer.libsr.models import basecnn_model
+from speech_recognizer.libsr.models import build_basecnn_model
 from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
@@ -36,7 +36,7 @@ def cnn_spec_gen_process(batch_size=140, epochs=10):
     lenght = next(train_gen)
     validation_gen = log_spec_validation_gen(60, index_path)
     steps = next(validation_gen)
-    trained_model = train_generator(basecnn_model,
+    trained_model = train_generator(build_basecnn_model(),
                                     train_gen,
                                     steps_per_epoch=lenght,
                                     epochs=epochs,

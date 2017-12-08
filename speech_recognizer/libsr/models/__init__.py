@@ -1,1 +1,1 @@
-from .cnn_3_layer import model as basecnn_model
+from .cnn_3_layer import build_model as build_basecnn_model
