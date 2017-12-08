@@ -1,3 +1,4 @@
+import sys
 from argparse import Namespace
 import multiprocessing
 from speech_recognizer.process.utils import REGIST_PROCESS
@@ -17,5 +18,5 @@ def train_command(args: Namespace)->None:
     process = REGIST_PROCESS.get(args.process_name)
     process()
     if p:
-        p.join()
+        #p.join()
         p.terminate()

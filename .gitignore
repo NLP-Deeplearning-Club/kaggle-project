@@ -112,3 +112,4 @@ ENV/
 
 submit_files/
 
+speech_recognizer/serialized_models/
