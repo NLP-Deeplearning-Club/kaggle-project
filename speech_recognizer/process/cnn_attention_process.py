@@ -1,13 +1,4 @@
-"""示范用的测试训练过程,注意,要使用预处理过程函数来初始化装饰器,这样才能在命令行中显示.
-
-这个过程的执行细节是是:
-
-+ 预处理训练数据使用生成器生成
-+ 使用默认Adam做为优化器
-+ 使用categorical_crossentropy作为损失函数
-+ 训练10个epoch,每个epoch训练的batchsize为140
-+ 验证数据使用生成器生成
-+ 验证集每个batch生成60个数据
+"""
 """
 from pathlib import Path
 from keras.optimizers import Adam
