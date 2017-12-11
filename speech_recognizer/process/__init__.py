@@ -1,1 +1,2 @@
 from .cnn_spec_process import cnn_spec_gen_process
+from .cnn_attention_process import cnn_attention_process
