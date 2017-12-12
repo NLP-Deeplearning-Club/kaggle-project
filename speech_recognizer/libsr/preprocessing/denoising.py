@@ -1,13 +1,7 @@
 """去噪音模块
 """
 
-from scipy.io import wavfile
-from scipy import signal
-import re
-from glob import glob
-import os
 import numpy as np
-
 
 def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
     """ 保留主要的音频而去除噪音
@@ -37,6 +31,8 @@ def get_main_voice(wav, filter_threshold=0.1, seg_length=800):
 
     # Find the longgest keep period
     # [1 0 1 1 0 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0] -> 5, 8 (longest continunous 1)
+    wav_length = wav.shape[0]
+    num_seg = int(wav_length / seg_length) + 1
     start, end = _get_longest_period(seg_keep_array)
     if start > 1:
         start = (start - 1)
@@ -52,7 +48,6 @@ def _split_by_length(wav, seg_length):
     """Split the wav by segment length"""
 
     wav_length = wav.shape[0]
-    num_seg = int(full_wav_length / seg_length) + 1
 
     indice = 0
     splitted_wavs = []
