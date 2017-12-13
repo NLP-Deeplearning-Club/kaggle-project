@@ -3,7 +3,6 @@
 import numpy as np
 import glob
 from scipy.io import wavfile
-import random
 
 def mix_background_noise(wav, background_volume_range=0.1, background_frequency=0.1):
 
@@ -48,11 +47,11 @@ def mix_background_noise(wav, background_volume_range=0.1, background_frequency=
     
     return background_clamp.reshape(wav_length)
 
-
 def _pick_random_noise():
     background_wavfiles = glob.glob('../../../dataset/train/audio/_background_noise_/*.wav')
-    wf = random.choice(background_wavfiles)
-    return _load_wav_file(wf)
+    index = np.random.randint(0, len(background_wavfiles))
+    noise_file = background_wavfiles[index]
+    return _load_wav_file(noise_file)
 
 
 def _load_wav_file(filename):
@@ -69,5 +68,14 @@ def _load_wav_file(filename):
     return wav
 
 if __name__=='__main__':
+
+    import matplotlib.pyplot as plt
+
     wav = _load_wav_file('../../../dataset/train/audio/right/988e2f9a_nohash_0.wav')
-    print(mix_background_noise(wav, 0.1,1))
+
+    f, ((ax11, ax12)) = plt.subplots(2, 1, sharex=True, sharey=True)
+
+    ax11.plot(wav)
+    ax12.plot(mix_background_noise(wav,0.1,1))
+
+    plt.show()
