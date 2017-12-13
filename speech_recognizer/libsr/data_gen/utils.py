@@ -1,7 +1,7 @@
 import json
 import numpy as np
-from ..label_transform import label_transform
-from ..find_record import find_train_data
+from .label_transform import label_transform
+from .find_record import find_train_data
 
 TRAIN_DATA, VALIDATION_DATA, TEST_DATA = find_train_data()
 

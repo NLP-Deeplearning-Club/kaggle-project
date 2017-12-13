@@ -1,9 +1,8 @@
 """ 将 silence 全部设置为 0 """
-
 import numpy as np
 
-def silence_as_zero(wav, label):
 
+def silence_as_zero(wav, label):
     """ 将 silence 全部设置为 0
 
     Args:
