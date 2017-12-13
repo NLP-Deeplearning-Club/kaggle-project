@@ -11,10 +11,12 @@
 """
 from pathlib import Path
 from keras.optimizers import Adam
-from speech_recognizer.libsr.preprocessing.blueprints import (
-    log_spec_perprocess,
+from speech_recognizer.libsr.preprocessing import (
+    log_spec_perprocess
+)
+from speech_recognizer.libsr.data_gen import (
     log_spec_train_gen,
-    log_spec_validation_gen,
+    log_spec_validation_gen
 )
 from speech_recognizer.libsr.models import build_basecnn_model
 from speech_recognizer.libsr.train import train_generator
@@ -23,7 +25,6 @@ from .utils import regist, get_current_function_name, tb_callback
 
 @regist(log_spec_perprocess)
 def cnn_spec_gen_process(batch_size=140, epochs=10):
-    
     p = Path(__file__).absolute()
     _dir = p.parent.parent
     func_name = get_current_function_name()

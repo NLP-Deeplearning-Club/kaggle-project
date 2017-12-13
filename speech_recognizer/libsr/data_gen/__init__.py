@@ -2,7 +2,7 @@ from functools import partial
 from speech_recognizer.libsr.preprocessing import (
     log_spec_perprocess
 )
-from speech_recognizer.libsr.preprocessing.mfcc_perprocess import (
+from speech_recognizer.libsr.preprocessing import (
     mfcc_perprocess
 )
 from .utils import (
