@@ -1,4 +1,10 @@
 from functools import partial
+from speech_recognizer.libsr.preprocessing import (
+    log_spec_perprocess
+)
+from speech_recognizer.libsr.preprocessing.mfcc_perprocess import (
+    mfcc_perprocess
+)
 from .utils import (
     get_train_data,
     train_gen,
@@ -7,8 +13,6 @@ from .utils import (
     get_test_data,
     test_gen
 )
-from .log_specgram_perprocess import log_spec_perprocess
-from .mfcc_perprocess import mfcc_perprocess
 
 log_spec_train_gen = partial(train_gen, log_spec_perprocess)
 log_spec_train_data = partial(get_train_data, log_spec_perprocess)

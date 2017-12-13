@@ -1,9 +1,9 @@
 """从路径获取数据,先进行重采样,再将结果用于计算对数频谱,最后padding后返回频谱数据
 """
 from scipy.io import wavfile
-from ..log_specgram import log_specgram
-from ..resample import resample
-from ..padding import padding_wave
+from .steps.log_specgram import log_specgram
+from .steps.resample import resample
+from .steps.padding import padding_wave
 
 
 def log_spec_perprocess(path):
