@@ -5,9 +5,9 @@ from .steps.resample import resample
 from .steps.padding import padding_wave
 
 
-def log_spec_perprocess(sample_rate, samples, cnn=False):
+def simple_log_spec_perprocess(sample_rate, samples, cnn=False):
     """使用对数频谱数据作为特征,预处理顺序为:
-    padding->截断->resample->log_specgram->添加一维用于作为图形处理
+    log_specgram->添加一维用于作为图形处理
 
     Parameters:
         sample_rate (int): - 音频采样率
@@ -18,14 +18,8 @@ def log_spec_perprocess(sample_rate, samples, cnn=False):
         (np.ndarray): - 若cnn参数为True.则返回的特征(3维),本处为(99, 81, 1),\
         否则返回特征(2维),本处为(99, 81)
     """
-    samples = padding_wave(samples)
-    if len(samples) > 16000:
-        samples = samples[:16000]
-    else:
-        samples = samples
-    new_sample_rate, resampled = resample(samples, sample_rate)
     _, _, specgram = log_specgram(
-        resampled, sample_rate=new_sample_rate)
+        samples, sample_rate=sample_rate)
     X_yield = specgram
     if cnn:
         X_yield = X_yield.reshape(tuple(list(X_yield.shape) + [1]))

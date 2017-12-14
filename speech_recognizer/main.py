@@ -68,7 +68,7 @@ class Command:
             description='''使用指定的模型和预处理过程预测测试文件夹下的音频,并输出为标准格式的文件,
 可选的模型有:{}'''.format(",".join(
                 list(REGIST_PROCESS.keys()))))
-        parser.add_argument("process_name", type=str)
+        parser.add_argument("process_name", type=str, nargs='+')
         parser.add_argument('-s', "--size", type=int, default=30000)
         parser.add_argument("--batch_size", type=int, default=32)
         parser.add_argument("--verbose", type=int, default=0)

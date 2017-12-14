@@ -1,29 +1,18 @@
-"""示范用的测试训练过程,注意,要使用预处理过程函数来初始化装饰器,这样才能在命令行中显示.
-
-这个过程的执行细节是是:
-
-+ 预处理训练数据使用生成器生成
-+ 使用默认Adam做为优化器
-+ 使用categorical_crossentropy作为损失函数
-+ 训练10个epoch,每个epoch训练的batchsize为140
-+ 验证数据使用生成器生成
-+ 验证集每个batch生成60个数据
-"""
 from pathlib import Path
 from functools import partial
 from keras.optimizers import Adam
 from speech_recognizer.libsr.preprocessing import (
-    log_spec_perprocess
+    simple_mfcc_perprocess
 )
 from speech_recognizer.libsr.data_augmentation import(
     aug_process
 )
 from speech_recognizer.libsr.data_gen import TrainData
-from speech_recognizer.libsr.models import build_basecnn_model
+from speech_recognizer.libsr.models import build_lstm_attention_model
 from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
-per = partial(log_spec_perprocess, cnn=True)
+per = partial(simple_mfcc_perprocess, numcep=26, cnn=False)
 aug = partial(aug_process, mode='train',
               desired_samples=16000,
               time_shift=2000,
@@ -32,25 +21,17 @@ aug = partial(aug_process, mode='train',
 
 
 @regist(per)
-def cnn_spec_gen_process(
-        model_kwargs=dict(input_shape=(99, 81, 1),
-                          cnn_layer1={"filters": 8, "kernel_size": 2,
-                                      "activation": "relu"},
-                          pool_layer1={"pool_size": (2, 2)},
-                          dropout_layer1={"rate": 0.2},
-                          cnn_layer2={"filters": 16, "kernel_size": 3,
-                                      "activation": "relu"},
-                          pool_layer2={"pool_size": (2, 2)},
-                          dropout_layer2={"rate": 0.2},
-                          cnn_layer3={"filters": 32, "kernel_size": 3,
-                                      "activation": "relu"},
-                          pool_layer3={"pool_size": (2, 2)},
-                          dropout_layer3={"rate": 0.2},
-                          mlp_layer1={"units": 128,
-                                      "activation": "relu"}),
+def lstm_attention_process(
+        model_kwargs=dict(input_shape=(99, 26),
+                          lstm_layer={
+            'units': 100,
+            'return_sequences': True},
+            attention_3d_layer={
+                "time_step": 99,
+            "single_attention_vector": False}),
         optimizer='adam', loss='categorical_crossentropy',  # 训练用的参数
         metrics=['mae', 'accuracy'], train_batch_size=140,
-        validation_batch_size=60, epochs=4):
+        validation_batch_size=60, epochs=6):
 
     p = Path(__file__).absolute()
     _dir = p.parent.parent
@@ -69,7 +50,7 @@ def cnn_spec_gen_process(
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)
     steps = next(validation_gen)
-    trained_model = train_generator(build_basecnn_model(**model_kwargs),
+    trained_model = train_generator(build_lstm_attention_model(**model_kwargs),
                                     train_gen,
                                     steps_per_epoch=lenght,
                                     epochs=epochs,

@@ -50,16 +50,3 @@ def _load_wav_file(filename):
     wav = wav.astype(np.float32) / np.iinfo(np.int16).max
     return wav
 
-
-if __name__ == '__main__':
-    import matplotlib.pyplot as plt
-
-    wav = _load_wav_file(
-        '../../../dataset/train/audio/right/988e2f9a_nohash_0.wav')
-
-    f, ((ax11, ax12)) = plt.subplots(2, 1, sharex=True, sharey=True)
-
-    ax11.plot(wav)
-    ax12.plot(shift_and_pad_zeros(wav))
-
-    plt.show()
