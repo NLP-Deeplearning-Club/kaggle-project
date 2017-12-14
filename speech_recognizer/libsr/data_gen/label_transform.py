@@ -15,11 +15,6 @@ def label_transform(labels):
     """
     nlabels = []
     for label in labels:
-        if label == '_background_noise_':
-            nlabels.append('silence')
-        elif label not in legal_labels:
-            nlabels.append('unknown')
-        else:
-            nlabels.append(label)
+        nlabels.append(label)
     table = pd.get_dummies(pd.Series(nlabels))
     return table

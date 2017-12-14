@@ -14,7 +14,7 @@ possible_labels = ['silence', 'unknown'] + wanted_words
 def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
               validation_rate=0.1,
               test_rate=0.1,
-              repeat=4,
+              repeat=0,
               unknown_rate=0.1,
               silence_rate=0.1):
     """
@@ -24,7 +24,7 @@ def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
         dataset_path (str): - 指明`dataset`文件夹所在路径,默认在,模块外一层
         validation_rate (float): - 指明验证集比例,这个并不是严格的,而是使用random函数随机抽取.默认为0.1
         test_rate (float): - 指明测试集比例,这个并不是严格的,而是使用random函数随机抽取.默认为0.1
-        repeat (int): - 指明非unknown和非silence的数据重复多少次
+        repeat (int): - 指明训练集中非unknown和非silence的数据重复多少次
         unknown_rate (float): - 指明各个数据集中未知数据的比例.默认为0.1
         silence_rate (float): - 指明各个数据集中沉默音的比例.默认为0.1
 
@@ -46,6 +46,9 @@ def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
                 rate = random.random()
                 if rate > not_train_rate:
                     train_data.append((item_path, clz))
+                    if repeat:
+                        for _ in range(repeat):
+                            train_data.append((item_path, clz))
                 else:
                     if rate < validation_rate:
                         test_data.append((item_path, clz))
@@ -65,7 +68,8 @@ def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
 
     # 计算各个数据集中应该有多少unknown数据
     len_unknown = int(math.ceil(
-        (unknown_rate / (1 - unknown_rate)) * (len_train_data + len_test_data + len_validation_data)))
+        (unknown_rate / (1 - unknown_rate)) * (
+            len_train_data + len_test_data + len_validation_data)))
     random.shuffle(unknown_data)
     samples = random.sample(unknown_data, len_unknown)
     for i in samples:

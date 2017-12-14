@@ -3,6 +3,7 @@ from argparse import Namespace
 from time import gmtime, strftime
 from tqdm import tqdm
 import numpy as np
+from scipy.io import wavfile
 from speech_recognizer.process.utils import (
     REGIST_PERPROCESS
 )
@@ -36,7 +37,8 @@ def test_data_gen(process_name, batch_size=200):
             try:
                 i = next(gen)
                 fname = i.name
-                temp = preprocess(str(i.absolute()))
+                rate, samples = wavfile.read(str(i.absolute()))
+                temp = preprocess(rate, samples)
             except StopIteration:
                 stop = True
                 break
@@ -75,7 +77,7 @@ def predict_submit_command(args: Namespace)->None:
                                  args.batch_size, args.verbose)
                 for fname, label in zip(
                         names,
-                        ((lab if lab in LABEL_LIST else "unknown") 
+                        ((lab if lab in LABEL_LIST else "unknown")
                             for lab, _ in labels)):
                     fout.write('{},{}\n'.format(fname, label))
                     schedule.update(1)
