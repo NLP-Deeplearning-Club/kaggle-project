@@ -4,7 +4,7 @@ from .steps.desired_samples import desired_samples_wav
 from .steps.silence_as_zero import silence_as_zero
 
 
-def aug_process(wav, label, mode='train',
+def aug_process(wav, label, mode,
                 desired_samples=16000,
                 time_shift=2000,
                 background_volume_range=0.1,

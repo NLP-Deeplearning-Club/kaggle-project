@@ -1,8 +1,6 @@
 """从路径获取数据,先进行重采样,再将结果用于计算对数频谱,最后padding后返回mfcc数据
 """
 from .steps.mfcc import mfcc
-from .steps.resample import resample
-from .steps.padding import padding_wave
 
 
 def simple_mfcc_perprocess(sample_rate, samples, cnn=False, **kwargs):
@@ -20,7 +18,7 @@ def simple_mfcc_perprocess(sample_rate, samples, cnn=False, **kwargs):
         否则返回特征(2维),本处为(99, 13)
     """
     specgram = mfcc(
-        samples, sample_rate=sample_rate, **kwargs)
+        audio=samples, sample_rate=sample_rate, **kwargs)
     X_yield = specgram
     if cnn:
         X_yield = X_yield.reshape(tuple(list(X_yield.shape) + [1]))

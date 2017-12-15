@@ -22,6 +22,7 @@ def train(model_blueprint, x, y, epochs, batch_size,
         Keras_model: - 训练完后的模型对象
     """
     model_blueprint.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+    print(model_blueprint.summary())
     model_blueprint.fit(x, y, epochs=epochs, batch_size=batch_size, **kwargs)
     return model_blueprint
 
@@ -46,6 +47,7 @@ def train_generator(model_blueprint, generator, steps_per_epoch, epochs=1,
         Keras_model: - 训练完后的模型对象
     """
     model_blueprint.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+    print(model_blueprint.summary())
     model_blueprint.fit_generator(generator,
                                   steps_per_epoch,
                                   epochs=epochs,

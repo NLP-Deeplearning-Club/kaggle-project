@@ -1,8 +1,8 @@
 from pathlib import Path
 from functools import partial
-from keras.optimizers import Adam
 from speech_recognizer.libsr.preprocessing import (
-    simple_mfcc_perprocess
+    simple_mfcc_perprocess,
+    mfcc_perprocess
 )
 from speech_recognizer.libsr.data_augmentation import(
     aug_process
@@ -12,12 +12,14 @@ from speech_recognizer.libsr.models import build_lstm_attention_model
 from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
-per = partial(simple_mfcc_perprocess, numcep=26, cnn=False)
-aug = partial(aug_process, mode='train',
-              desired_samples=16000,
-              time_shift=2000,
-              background_volume_range=0.1,
-              background_frequency=0.1)
+#per = partial(simple_mfcc_perprocess, numcep=26, cnn=False)
+per = partial(mfcc_perprocess, numcep=26, cnn=False)
+aug = None
+# aug = partial(aug_process,
+#               desired_samples=16000,
+#               time_shift=2000,
+#               background_volume_range=0.1,
+#               background_frequency=0.1)
 
 
 @regist(per)
@@ -43,8 +45,8 @@ def lstm_attention_process(
         "serialized_models/" + func_name + "_model.h5")
 
     data = TrainData(perprocess=per, index_path=index_path, aug_process=aug)
-    # print(data.test_data[0].shape)
-    # print(data.test_data[1].shape)
+    #print(data.test_data[0].shape)
+    #print(data.test_data[1].shape)
 
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)

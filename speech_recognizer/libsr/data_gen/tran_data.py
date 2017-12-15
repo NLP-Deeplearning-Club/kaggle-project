@@ -13,7 +13,7 @@ class TrainData:
         perprocess (callable): - 用于预处理的可执行对象,要求输入的参数为sample_rate, samples
         index_path (file path): - 用于保存标签顺序的json文件地址
         aug_process (callable): - 用于做数据增强的过程,默认为None,也就是不做数据增强,如果是可执行程序,\
-        要求参数为wav, label
+        要求参数为wav, label, mode
         TRAIN_DATA (tuple): - 训练集原始数据,分为两部分,一部分是数据地址,一部分是标签
         VALIDATION_DATA (tuple): - 验证集原始数据,分为两部分,一部分是数据地址,一部分是标签
         TEST_DATA (tuple): - 测试集原始数据,分为两部分,一部分是数据地址,一部分是标签
@@ -26,13 +26,14 @@ class TrainData:
 
     @staticmethod
     def _data_gen(perprocess, data,
-                  index_path, aug_process=None, save=True, can_stop=False):
+                  index_path, aug_process=None, aug_mode=None, save=True, can_stop=False):
         """将数据在迭代器中进行预处理从而减小内存消耗,第一个next会返回数据集的长度.
         如果can_stop标记为False,数据一遍推完后它会回到起点再接着推
 
         Parameters:
             perprocess (callable): - 用于预处理的可执行对象
             aug_process (callable): - 用于数据增强的可执行对象
+            aug_mode (str): - 用于指明数据增强的模式,默认为None,train模式会和其他有区别
             data (Sequence): - 要预处理的原始数据
             index_path (file path): - 用于保存标签顺序的json文件地址
             save (bool): - 标识是保存标签顺序还是读取标签顺序
@@ -77,7 +78,8 @@ class TrainData:
             y_yield_label = y[flag]
             X_yield_rate, X_yield_wav = wavfile.read(X_yield_path)
             if aug_process:
-                X_yield_wav = aug_process(wav=X_yield_wav, label=y_yield_label)
+                X_yield_wav = aug_process(
+                    wav=X_yield_wav, label=y_yield_label, mode=aug_mode)
             X_yield = perprocess(sample_rate=X_yield_rate, samples=X_yield_wav)
             y_yield = y_yields[flag]
             yield X_yield, y_yield
@@ -118,7 +120,8 @@ class TrainData:
     @property
     def train_data(self):
         if self._train_data is None:
-            self._train_data = self._get_data(self.TRAIN_DATA, save=True)
+            self._train_data = self._get_data(
+                self.TRAIN_DATA, aug_mode="train", save=True)
         return self._train_data
 
     @property
@@ -133,11 +136,12 @@ class TrainData:
             self._test_data = self._get_data(self.TEST_DATA)
         return self._test_data
 
-    def _get_data(self, dataset, save=False):
+    def _get_data(self, dataset, aug_mode=None, save=False):
         """将训练集数据在迭代器中进行预处理后整合为一个(特征集,标签集)组成的训练数据集
 
         Parameters:
             dataset (tuple): - 要处理的原始数据集
+            aug_mode (str): - 用于指明数据增强的模式,默认为None,train模式会和其他有区别
             save (bool): - 是否保存标签顺序的json文件地址
 
         Return:
@@ -149,6 +153,7 @@ class TrainData:
         gen = TrainData._data_gen(self.perprocess, dataset,
                                   self.index_path,
                                   self.aug_process,
+                                  aug_mode=aug_mode,
                                   save=save, can_stop=True)
         next(gen)  # 让迭代器从第二个next开始执行
         for i, j in gen:
@@ -156,9 +161,10 @@ class TrainData:
             train_y.append(j)
         X = np.array(train_X)
         y = np.array(train_y)
+        print(X.shape)
         return X, y
 
-    def _batch_gen(self, dataset, batch_size, save=False):
+    def _batch_gen(self, dataset, batch_size, aug_mode=None, save=False):
         """将数据集数据在迭代器中进行预处理后按batch大小向模型中推送数据的生成器,
         第一个next会返回按batch划分后要多少个迭代才可以推完全部数据.这个迭代器是不会停止可以无限循环的,
         数据一遍推完后它会回到起点再接着推
@@ -166,6 +172,7 @@ class TrainData:
         Parameters:
             dataset (tuple[list,list]): - 由音频地址集,和标签集组成的数据集
             batch_size (int): - 设定最大batch长度
+            aug_mode (str): - 用于指明数据增强的模式,默认为None,train模式会和其他有区别
             save (bool): - 是否保存标签顺序的json文件地址
 
         Yield:
@@ -184,7 +191,9 @@ class TrainData:
                 temp_X, temp_y = next(gen)
                 batch_X.append(temp_X)
                 batch_y.append(temp_y)
-            yield np.array(batch_X), np.array(batch_y)
+            X = np.array(batch_X)
+            y = np.array(batch_y)
+            yield X, y
 
     def train_gen(self, batch_size):
         """将训练集数据在迭代器中进行预处理后按batch大小向模型中推送数据的生成器,
@@ -198,7 +207,8 @@ class TrainData:
             tuple[np.ndarray,np.ndarray]: - 由特征组(batch_size*n维)\
             和标签onehot(batch_size*一维)组组成的元组,特征维数要看预处理是怎么做的
         """
-        batch_gen = self._batch_gen(self.TRAIN_DATA, batch_size, save=True)
+        batch_gen = self._batch_gen(
+            self.TRAIN_DATA, batch_size, aug_mode="train", save=True)
         loopcount = next(batch_gen)
         yield loopcount
         while True:

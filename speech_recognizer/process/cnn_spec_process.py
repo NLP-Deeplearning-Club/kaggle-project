@@ -24,11 +24,12 @@ from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
 per = partial(log_spec_perprocess, cnn=True)
-aug = partial(aug_process, mode='train',
-              desired_samples=16000,
-              time_shift=2000,
-              background_volume_range=0.1,
-              background_frequency=0.1)
+aug = None
+# aug = partial(aug_process,
+#               desired_samples=16000,
+#               time_shift=2000,
+#               background_volume_range=0.1,
+#               background_frequency=0.1)
 
 
 @regist(per)

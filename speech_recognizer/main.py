@@ -70,7 +70,7 @@ class Command:
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str, nargs='+')
         parser.add_argument('-s', "--size", type=int, default=30000)
-        parser.add_argument("--batch_size", type=int, default=32)
+        parser.add_argument("--batch_size", type=int, default=30)
         parser.add_argument("--verbose", type=int, default=0)
         parser.set_defaults(func=predict_submit_command)
         args = parser.parse_args(self.argv[1:])
