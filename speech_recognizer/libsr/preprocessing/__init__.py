@@ -1,2 +1,4 @@
 from .log_specgram_perprocess import log_spec_perprocess
 from .mfcc_perprocess import mfcc_perprocess
+from .simple_log_spec import simple_log_spec_perprocess
+from .simple_mfcc import simple_mfcc_perprocess

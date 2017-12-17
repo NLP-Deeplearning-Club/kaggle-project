@@ -17,5 +17,4 @@ def train_command(args: Namespace)->None:
     process = REGIST_PROCESS.get(args.process_name)
     process()
     if p:
-        p.join()
         p.terminate()
