@@ -49,8 +49,7 @@ def mix_background_noise(wav, background_volume_range=0.1, background_frequency=
     # Clip by -1, 1
     background_clamp = np.clip(wav_with_noise, -1.0, 1.0)
 
-    # return background_clamp.reshape(wav_length)
-    return wav_with_noise
+    return background_clamp
 
 
 def _pick_random_noise():
