@@ -4,6 +4,7 @@ from .steps.desired_samples import desired_samples_wav
 from .steps.silence_as_zero import silence_as_zero
 from .steps.normalize_wav import normalize_wav
 
+
 def aug_process(wav, label, mode,
                 desired_samples=16000,
                 time_shift=2000,

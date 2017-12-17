@@ -161,7 +161,7 @@ class TrainData:
             train_y.append(j)
         X = np.array(train_X)
         y = np.array(train_y)
-        print(X.shape)
+        #print(X.shape)
         return X, y
 
     def _batch_gen(self, dataset, batch_size, aug_mode=None, save=False):

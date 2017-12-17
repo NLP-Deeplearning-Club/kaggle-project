@@ -1,10 +1,9 @@
 """ 把 wav 数据的值规范化到 0 - 1 之间
 """
-
 import numpy as np
 
-def normalize_wav(wav):
 
+def normalize_wav(wav):
     """ 把 wav 数据的值规范化到 0 - 1 之间
 
     Args:

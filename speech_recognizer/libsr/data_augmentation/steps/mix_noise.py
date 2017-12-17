@@ -43,7 +43,7 @@ def mix_background_noise(wav, background_volume_range=0.1, background_frequency=
     else:
         background_volume = 0
     background_noise = np.multiply(background_reshaped, background_volume)
-    print(wav.max())
+    #print(wav.max())
     wav_with_noise = background_noise + wav
 
     # Clip by -1, 1
@@ -75,25 +75,25 @@ def _load_wav_file(filename):
     wav = wav.astype(np.float32) / np.iinfo(np.int16).max
     return wav
 
-if __name__=='__main__':
+# if __name__=='__main__':
 
-    import matplotlib.pyplot as plt
-    from   scipy.io import wavfile
-    from   pathlib  import Path
-    from   normalize_wav import normalize_wav
+#     import matplotlib.pyplot as plt
+#     from   scipy.io import wavfile
+#     from   pathlib  import Path
+#     from   normalize_wav import normalize_wav
 
-    # Raed wav
-    DEFAULT_DATASET_PATH = Path(__file__).absolute(
-        ).parent.parent.parent.parent.parent.joinpath('dataset')
-    wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
-        'audio', 'bed', '0a7c2a8d_nohash_0.wav')
-    _, wav = wavfile.read(str(wav_filepath))
+#     # Raed wav
+#     DEFAULT_DATASET_PATH = Path(__file__).absolute(
+#         ).parent.parent.parent.parent.parent.joinpath('dataset')
+#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
+#         'audio', 'bed', '0a7c2a8d_nohash_0.wav')
+#     _, wav = wavfile.read(str(wav_filepath))
 
-    # Normalize wav
-    wav = normalize_wav(wav)
+#     # Normalize wav
+#     wav = normalize_wav(wav)
 
-    # Show wav with noise
-    plt.figure()
-    plt.plot(mix_background_noise(wav, 0.1, 1))
-    plt.title('Wav with Noise')
-    plt.show()
+#     # Show wav with noise
+#     plt.figure()
+#     plt.plot(mix_background_noise(wav, 0.1, 1))
+#     plt.title('Wav with Noise')
+#     plt.show()

@@ -24,37 +24,37 @@ def desired_samples_wav(wav, desired_samples=16000):
         desired_wav = wav
     return desired_wav
 
-if __name__=='__main__':
+# if __name__=='__main__':
 
-    from scipy.io import wavfile
-    from pathlib  import Path
+#     from scipy.io import wavfile
+#     from pathlib  import Path
 
-    DEFAULT_DATASET_PATH = Path(__file__).absolute(
-        ).parent.parent.parent.parent.parent.joinpath('dataset')
+#     DEFAULT_DATASET_PATH = Path(__file__).absolute(
+#         ).parent.parent.parent.parent.parent.joinpath('dataset')
         
-    wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
-        'audio', 'bed', '0a7c2a8d_nohash_0.wav')
-    _, wav = wavfile.read(str(wav_filepath))
+#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
+#         'audio', 'bed', '0a7c2a8d_nohash_0.wav')
+#     _, wav = wavfile.read(str(wav_filepath))
 
-    # Change wav length to 13000, so now the wav is not the length we need
-    wav = wav[:13000]
-    # Use this function to preprocess it to desired length
-    desired_wav = desired_samples_wav(wav)
+#     # Change wav length to 13000, so now the wav is not the length we need
+#     wav = wav[:13000]
+#     # Use this function to preprocess it to desired length
+#     desired_wav = desired_samples_wav(wav)
 
-    print('')
-    print('------------------- Test 1: pad 0 for short wav ---------------------')
-    print('')
-    print('Original wav length:', wav.shape[0], 
-          'after preprocessing, desired length:', desired_wav.shape[0])
+#     print('')
+#     print('------------------- Test 1: pad 0 for short wav ---------------------')
+#     print('')
+#     print('Original wav length:', wav.shape[0], 
+#           'after preprocessing, desired length:', desired_wav.shape[0])
 
-    # Pad wav to make it longer than 16000
-    wav = np.lib.pad(wav, (0, 4000), mode='constant')
-    # Use this function to preprocess it to desired length
-    desired_wav = desired_samples_wav(wav)
+#     # Pad wav to make it longer than 16000
+#     wav = np.lib.pad(wav, (0, 4000), mode='constant')
+#     # Use this function to preprocess it to desired length
+#     desired_wav = desired_samples_wav(wav)
 
-    print('')
-    print('-------------- Test 2: random choose range for long wav -------------')
-    print('')
-    print('Original wav length:', wav.shape[0], 
-          'after preprocessing, desired length:', desired_wav.shape[0])
-    print('')
+#     print('')
+#     print('-------------- Test 2: random choose range for long wav -------------')
+#     print('')
+#     print('Original wav length:', wav.shape[0], 
+#           'after preprocessing, desired length:', desired_wav.shape[0])
+#     print('')

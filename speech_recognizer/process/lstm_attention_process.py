@@ -12,14 +12,22 @@ from speech_recognizer.libsr.models import build_lstm_attention_model
 from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
-#per = partial(simple_mfcc_perprocess, numcep=26, cnn=False)
-per = partial(mfcc_perprocess, numcep=26, cnn=False)
-aug = None
+# per = partial(mfcc_perprocess, numcep=26, cnn=False)
+# aug = None
+
+# per = partial(simple_mfcc_perprocess, numcep=26, cnn=False)
 # aug = partial(aug_process,
 #               desired_samples=16000,
 #               time_shift=2000,
 #               background_volume_range=0.1,
 #               background_frequency=0.1)
+
+per = partial(mfcc_perprocess, numcep=26, cnn=False)
+aug = partial(aug_process,
+              desired_samples=16000,
+              time_shift=2000,
+              background_volume_range=0.1,
+              background_frequency=0.1)
 
 
 @regist(per)
