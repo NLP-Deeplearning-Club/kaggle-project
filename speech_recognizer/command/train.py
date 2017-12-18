@@ -1,4 +1,5 @@
 from argparse import Namespace
+import json
 import multiprocessing
 from speech_recognizer.process.utils import REGIST_PROCESS
 from speech_recognizer.process import *
@@ -15,6 +16,11 @@ def train_command(args: Namespace)->None:
         p.start()
         
     process = REGIST_PROCESS.get(args.process_name)
-    process()
+    if args.use_config:
+        kwargs = json.load(args.use_config)
+        args.use_config.close()
+        process(**kwargs)
+    else:
+        process()
     if p:
         p.terminate()

@@ -44,6 +44,8 @@ class Command:
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
         parser.add_argument("-b", "--tf_board", action="store_true")
+        parser.add_argument("-c", "--use_config", type=open,
+                            help="使用json形式保存的配置文件来训练")
         parser.set_defaults(func=train_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)

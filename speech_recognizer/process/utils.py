@@ -1,4 +1,5 @@
 import inspect
+from functools import wraps
 from pathlib import Path
 import keras
 p = Path(__file__).absolute()
@@ -61,4 +62,14 @@ class regist:
     def __call__(self, func):
         REGIST_PROCESS[func.__name__] = func
         REGIST_PERPROCESS[func.__name__] = self.preprocess
-        return func
+        sig = inspect.signature(func)
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            bound_args = sig.bind(*args, **kwargs)
+            for kw,arg in bound_args.items():
+                print(kw)
+                print(args)
+            return func(*args, **kwargs)
+
+        return wrapper
