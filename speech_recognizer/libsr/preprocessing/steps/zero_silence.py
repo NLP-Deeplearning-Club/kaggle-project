@@ -14,5 +14,4 @@ def silence_as_zero(wav, label):
         volume_scale = 0
     else:
         volume_scale = 1
-
     return np.multiply(wav, volume_scale)

@@ -11,10 +11,12 @@ def train_command(args: Namespace)->None:
     """
     p = None
     if args.tf_board:
-        p = multiprocessing.Process(target=run_tf_board,args=[args.process_name])
+        p = multiprocessing.Process(
+            target=run_tf_board,
+            args=[args.process_name])
         p.daemon = True
         p.start()
-        
+
     process = REGIST_PROCESS.get(args.process_name)
     if args.use_config:
         kwargs = json.load(args.use_config)

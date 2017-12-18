@@ -1,6 +1,7 @@
 """使wav数据整齐"""
 import numpy as np
 
+
 def desired_samples_wav(wav, desired_samples=16000):
     """ 如果wav数据没有采样足够,则用0值补齐否则随机的在 wav 数据里面挑选一段足够采样的连续完整wav出来
 
@@ -24,6 +25,7 @@ def desired_samples_wav(wav, desired_samples=16000):
         desired_wav = wav
     return desired_wav
 
+
 # if __name__=='__main__':
 
 #     from scipy.io import wavfile
@@ -31,8 +33,8 @@ def desired_samples_wav(wav, desired_samples=16000):
 
 #     DEFAULT_DATASET_PATH = Path(__file__).absolute(
 #         ).parent.parent.parent.parent.parent.joinpath('dataset')
-        
-#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
+
+#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train',
 #         'audio', 'bed', '0a7c2a8d_nohash_0.wav')
 #     _, wav = wavfile.read(str(wav_filepath))
 
@@ -44,7 +46,7 @@ def desired_samples_wav(wav, desired_samples=16000):
 #     print('')
 #     print('------------------- Test 1: pad 0 for short wav ---------------------')
 #     print('')
-#     print('Original wav length:', wav.shape[0], 
+#     print('Original wav length:', wav.shape[0],
 #           'after preprocessing, desired length:', desired_wav.shape[0])
 
 #     # Pad wav to make it longer than 16000
@@ -55,6 +57,6 @@ def desired_samples_wav(wav, desired_samples=16000):
 #     print('')
 #     print('-------------- Test 2: random choose range for long wav -------------')
 #     print('')
-#     print('Original wav length:', wav.shape[0], 
+#     print('Original wav length:', wav.shape[0],
 #           'after preprocessing, desired length:', desired_wav.shape[0])
 #     print('')

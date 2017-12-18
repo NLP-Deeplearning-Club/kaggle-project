@@ -13,26 +13,24 @@ from pathlib import Path
 from functools import partial
 from keras.optimizers import Adam
 from speech_recognizer.libsr.preprocessing import (
-    log_spec_perprocess
+    normalize_resample_perprocess
 )
 from speech_recognizer.libsr.data_augmentation import(
     aug_process
+)
+from speech_recognizer.libsr.feature_extract import (
+    log_specgram
 )
 from speech_recognizer.libsr.data_gen import TrainData
 from speech_recognizer.libsr.models import build_basecnn_model
 from speech_recognizer.libsr.train import train_generator
 from .utils import regist, get_current_function_name, tb_callback
 
-per = partial(log_spec_perprocess, cnn=True)
-aug = None
-# aug = partial(aug_process,
-#               desired_samples=16000,
-#               time_shift=2000,
-#               background_volume_range=0.1,
-#               background_frequency=0.1)
+per = normalize_resample_perprocess
+fe = partial(log_specgram, cnn=True)
 
 
-@regist(per)
+@regist(per, fe)
 def cnn_spec_gen_process(
         model_kwargs=dict(input_shape=(99, 81, 1),
                           cnn_layer1={"filters": 8, "kernel_size": 2,
@@ -49,6 +47,7 @@ def cnn_spec_gen_process(
                           dropout_layer3={"rate": 0.2},
                           mlp_layer1={"units": 128,
                                       "activation": "relu"}),
+        aug_process_kwargs=None,  # 数据增强
         optimizer='adam', loss='categorical_crossentropy',  # 训练用的参数
         metrics=['mae', 'accuracy'], train_batch_size=140,
         validation_batch_size=60, epochs=4):
@@ -61,11 +60,12 @@ def cnn_spec_gen_process(
 
     path = _dir.joinpath(
         "serialized_models/" + func_name + "_model.h5")
-
-    data = TrainData(perprocess=per, index_path=index_path, aug_process=aug)
-    # print(data.test_data[0].shape)
-    # print(data.test_data[1].shape)
-
+    if aug_process_kwargs:
+        aug = partial(aug_process, **aug_process_kwargs)
+    else:
+        aug = None
+    data = TrainData(perprocess=per, feature_extract=fe,
+                     index_path=index_path, aug_process=aug)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)

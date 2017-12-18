@@ -7,7 +7,8 @@ import numpy as np
 import pandas as pd
 from scipy.io import wavfile
 from speech_recognizer.process.utils import (
-    REGIST_PERPROCESS
+    REGIST_PERPROCESS,
+    REGIST_FEATURE_EXTRACT
 )
 from speech_recognizer.libsr import predict
 
@@ -30,6 +31,7 @@ def test_data_gen(process_name, batch_size=200):
     p = Path(__file__).absolute().parent.parent.parent.joinpath(
         "dataset/test/audio")
     preprocesses = {i: REGIST_PERPROCESS.get(i) for i in process_name}
+    feature_extracts = {i: REGIST_FEATURE_EXTRACT.get(i) for i in process_name}
     gen = p.iterdir()
     stop = False
     while True:
@@ -40,7 +42,10 @@ def test_data_gen(process_name, batch_size=200):
                 i = next(gen)
                 fname = i.name
                 rate, samples = wavfile.read(str(i.absolute()))
-                temp = {p: f(rate, samples) for p, f in preprocesses.items()}
+                temp = {}
+                for p, f in preprocesses.items():
+                    r, t = f(rate, samples)
+                    temp[p] = feature_extracts.get(p)(r, t)
             except StopIteration:
                 stop = True
                 break
@@ -82,8 +87,9 @@ def predict_submit_command(args: Namespace)->None:
             for names, X in gen:
                 lab_zip_list = []
                 for i in args.process_name:
-                    labels = [lab for lab, _ in predict(i, X[i],
-                                                        args.batch_size, args.verbose)]
+                    labels = [lab for lab, _ in predict(
+                        i, X[i],
+                        args.batch_size, args.verbose)]
                     lab_zip_list.append(labels)
                 if len(lab_zip_list) == 1:
                     labels = lab_zip_list[0]

@@ -1,5 +1,4 @@
 """ 随机的向 wav 数据里面加入背景噪音 """
-
 import numpy as np
 import glob
 from pathlib import Path
@@ -43,7 +42,7 @@ def mix_background_noise(wav, background_volume_range=0.1, background_frequency=
     else:
         background_volume = 0
     background_noise = np.multiply(background_reshaped, background_volume)
-    #print(wav.max())
+    # print(wav.max())
     wav_with_noise = background_noise + wav
 
     # Clip by -1, 1
@@ -85,7 +84,7 @@ def _load_wav_file(filename):
 #     # Raed wav
 #     DEFAULT_DATASET_PATH = Path(__file__).absolute(
 #         ).parent.parent.parent.parent.parent.joinpath('dataset')
-#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train', 
+#     wav_filepath = DEFAULT_DATASET_PATH.joinpath('train',
 #         'audio', 'bed', '0a7c2a8d_nohash_0.wav')
 #     _, wav = wavfile.read(str(wav_filepath))
 

@@ -25,13 +25,15 @@ class TrainData:
     """
 
     @staticmethod
-    def _data_gen(perprocess, data,
-                  index_path, aug_process=None, aug_mode=None, save=True, can_stop=False):
+    def _data_gen(perprocess, feature_extract, data,
+                  index_path, aug_process=None, aug_mode=None,
+                  save=True, can_stop=False):
         """将数据在迭代器中进行预处理从而减小内存消耗,第一个next会返回数据集的长度.
         如果can_stop标记为False,数据一遍推完后它会回到起点再接着推
 
         Parameters:
             perprocess (callable): - 用于预处理的可执行对象
+            feature_extract (callable): - 用于提取特征的可执行对象
             aug_process (callable): - 用于数据增强的可执行对象
             aug_mode (str): - 用于指明数据增强的模式,默认为None,train模式会和其他有区别
             data (Sequence): - 要预处理的原始数据
@@ -77,15 +79,19 @@ class TrainData:
             X_yield_path = X[flag]
             y_yield_label = y[flag]
             X_yield_rate, X_yield_wav = wavfile.read(X_yield_path)
+
+            X_yield_rate, X_yield_wav = perprocess(
+                sample_rate=X_yield_rate, samples=X_yield_wav)
             if aug_process:
                 X_yield_wav = aug_process(
                     wav=X_yield_wav, label=y_yield_label, mode=aug_mode)
-            X_yield = perprocess(sample_rate=X_yield_rate, samples=X_yield_wav)
+            X_yield = feature_extract(X_yield_rate, X_yield_wav)
             y_yield = y_yields[flag]
             yield X_yield, y_yield
             flag += 1
 
     def __init__(self, perprocess,
+                 feature_extract,
                  index_path,
                  aug_process=None,
                  validation_rate=0.1,
@@ -96,6 +102,7 @@ class TrainData:
         """
         Parameters:
             perprocess (callable): - 用于预处理的可执行对象
+            feature_extract (callable): - 用于提取特征的可执行对象
             index_path (file path): - 用于保存标签顺序的json文件地址
             aug_process (callable): - 用于做数据增强的过程,默认为None,也就是不做数据增强
             validation_rate (float): - 指明验证集比例,这个并不是严格的,而是使用random函数随机抽取.默认为0.1
@@ -105,6 +112,7 @@ class TrainData:
             silence_rate (float): - 指明各个数据集中沉默音的比例.默认为0.1
         """
         self.perprocess = perprocess
+        self.feature_extract = feature_extract
         self.index_path = index_path
         self.aug_process = aug_process
         self.TRAIN_DATA, self.VALIDATION_DATA, self.TEST_DATA = find_data(
@@ -150,7 +158,9 @@ class TrainData:
         """
         train_X = []
         train_y = []
-        gen = TrainData._data_gen(self.perprocess, dataset,
+        gen = TrainData._data_gen(self.perprocess,
+                                  self.feature_extract,
+                                  dataset,
                                   self.index_path,
                                   self.aug_process,
                                   aug_mode=aug_mode,
@@ -161,7 +171,7 @@ class TrainData:
             train_y.append(j)
         X = np.array(train_X)
         y = np.array(train_y)
-        #print(X.shape)
+        # print(X.shape)
         return X, y
 
     def _batch_gen(self, dataset, batch_size, aug_mode=None, save=False):
@@ -179,8 +189,9 @@ class TrainData:
             tuple[np.ndarray,np.ndarray]: - 由特征组(batch_size*n维)\
             和标签onehot(batch_size*一维)组组成的元组,特征维数要看预处理是怎么做的
         """
-        gen = TrainData._data_gen(self.perprocess, dataset,
-                                  self.index_path, self.aug_process, save=save)
+        gen = TrainData._data_gen(self.perprocess, self.feature_extract, dataset,
+                                  self.index_path, self.aug_process,
+                                  aug_mode=aug_mode, save=save)
         ylen = next(gen)
         loopcount = ylen // batch_size
         yield loopcount
@@ -252,89 +263,3 @@ class TrainData:
         while True:
             batch_X, batch_y = next(batch_gen)
             yield batch_X, batch_y
-
-    # def train_gen(self, batch_size):
-    #     """将训练集数据在迭代器中进行预处理后按batch大小向模型中推送数据的生成器,
-    #     第一个next会返回按batch划分后要多少个迭代才可以推完全部数据.这个迭代器是不会停止可以无限循环的,
-    #     数据一遍推完后它会回到起点再接着推
-
-    #     Parameters:
-    #         perprocess (callable): - 用于预处理的可执行对象
-    #         batch_size (int): - 设定最大batch长度
-    #         index_path (file path): - 用于保存标签顺序的json文件地址
-
-    #     Yield:
-    #         tuple[np.ndarray,np.ndarray]: - 由特征组(batch_size*n维)\
-    #         和标签onehot(batch_size*一维)组组成的元组,特征维数要看预处理是怎么做的
-    #     """
-    #     gen = TrainData._data_gen(self.perprocess, self.aug_process,
-    #                               self.TRAIN_DATA, self.index_path)
-    #     ylen = next(gen)
-    #     loopcount = ylen // batch_size
-    #     yield loopcount
-    #     while True:
-    #         batch_X = []
-    #         batch_y = []
-    #         for _ in range(batch_size):
-    #             temp_X, temp_y = next(gen)
-    #             batch_X.append(temp_X)
-    #             batch_y.append(temp_y)
-    #         yield np.array(batch_X), np.array(batch_y)
-
-    # def validation_gen(self, batch_size):
-    #     """将验证集数据在迭代器中进行预处理后按batch大小向模型中推送数据的生成器,
-    #     第一个next会返回按batch划分后要多少个迭代才可以推完全部数据.这个迭代器是不会停止可以无限循环的,
-    #     数据一遍推完后它会回到起点再接着推
-
-    #     Parameters:
-    #         perprocess (callable): - 用于预处理的可执行对象
-    #         batch_size (int): - 设定最大batch长度
-    #         index_path (file path): - 用于保存标签顺序的json文件地址
-
-    #     Yield:
-    #         tuple[np.ndarray,np.ndarray]: - 由特征组(batch_size*n维)\
-    #         和标签onehot(batch_size*一维)组组成的元组,特征维数要看预处理是怎么做的
-    #     """
-    #     gen = TrainData._data_gen(self.perprocess, self.aug_process,
-    #                               self.VALIDATION_DATA, self.index_path,
-    #                               save=False)
-    #     ylen = next(gen)
-    #     loopcount = ylen // batch_size
-    #     yield loopcount
-    #     while True:
-    #         batch_X = []
-    #         batch_y = []
-    #         for _ in range(batch_size):
-    #             temp_X, temp_y = next(gen)
-    #             batch_X.append(temp_X)
-    #             batch_y.append(temp_y)
-    #         yield np.array(batch_X), np.array(batch_y)
-
-    # def test_gen(self, batch_size):
-    #     """将验证集数据在迭代器中进行预处理后按batch大小向模型中推送数据的生成器,
-    #     第一个next会返回按batch划分后要多少个迭代才可以推完全部数据.这个迭代器是不会停止可以无限循环的,
-    #     数据一遍推完后它会回到起点再接着推
-
-    #     Parameters:
-    #         perprocess (callable): - 用于预处理的可执行对象
-    #         batch_size (int): - 设定最大batch长度
-    #         index_path (file path): - 用于保存标签顺序的json文件地址
-
-    #     Yield:
-    #         tuple[np.ndarray,np.ndarray]: - 由特征组(batch_size*n维)和\
-    #         标签onehot(batch_size*一维)组组成的元组,特征维数要看预处理是怎么做的
-    #     """
-    #     gen = TrainData._data_gen(self.perprocess, self.aug_process,
-    #                               self.TEST_DATA, self.index_path,
-    #                               save=False)
-    #     ylen = next(gen)
-    #     loopcount = ylen // batch_size
-    #     yield loopcount
-    #     while True:
-    #         batch_X = []
-    #         batch_y = []
-    #         for _ in range(batch_size):
-    #             temp_X, temp_y = next(gen)
-    #             batch_X.append(temp_X)
-    #             batch_y.append(temp_y)
-    #         yield np.array(batch_X), np.array(batch_y)

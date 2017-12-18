@@ -6,9 +6,10 @@ p = Path(__file__).absolute()
 _dir = p.parent.parent
 REGIST_PROCESS = {}
 REGIST_PERPROCESS = {}
+REGIST_FEATURE_EXTRACT = {}
 
 
-def tb_callback(process_name,  histogram_freq=0,
+def tb_callback(process_name, histogram_freq=0,
                 write_graph=True, write_images=True,
                 embeddings_freq=0,
                 embeddings_layer_names=None,
@@ -56,18 +57,21 @@ class regist:
         preprocess (callable): - 注册过程名字对应的预处理函数
     """
 
-    def __init__(self, preprocess):
+    def __init__(self, preprocess, feature_extract):
         self.preprocess = preprocess
+        self.feature_extract = feature_extract
 
     def __call__(self, func):
         REGIST_PROCESS[func.__name__] = func
         REGIST_PERPROCESS[func.__name__] = self.preprocess
+        REGIST_FEATURE_EXTRACT[func.__name__] = self.feature_extract
         sig = inspect.signature(func)
 
         @wraps(func)
         def wrapper(*args, **kwargs):
             bound_args = sig.bind(*args, **kwargs)
-            for kw,arg in bound_args.items():
+            for kw, arg in bound_args.items():
+                print("bound_args:")
                 print(kw)
                 print(args)
             return func(*args, **kwargs)
