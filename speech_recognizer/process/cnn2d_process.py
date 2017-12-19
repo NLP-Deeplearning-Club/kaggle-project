@@ -3,7 +3,7 @@ from keras import initializers
 from speech_recognizer.libsr.preprocessing import (
     normalize_perprocess
 )
-from speech_recognizer.libsr.data_augmentation import(
+from speech_recognizer.libsr.data_augmentation import (
     aug_process
 )
 from speech_recognizer.libsr.feature_extract import (
@@ -15,16 +15,16 @@ from speech_recognizer.libsr.train import train_generator
 from .utils import regist, tb_callback
 
 per = normalize_perprocess
-fe = partial(mfcc, numcep=26, cnn=False)
+fe = partial(mfcc, numcep=26, cnn=True)
 
 
 @regist(per, fe)
 def cnn2d_process(
-        data,
         model_kwargs=dict(
             cnn_layer1={
                 'input_shape': (99, 26, 1),
-                "kernel_initializer": initializers.TruncatedNormal(stddev=0.01),
+                "kernel_initializer": initializers.TruncatedNormal(
+                    stddev=0.01),
                 "filters": 8,
                 "strides": (1, 1),
                 "kernel_size": 20,
@@ -36,7 +36,8 @@ def cnn2d_process(
             dropout_layer1={"rate": 0.2},
             cnn_layer2={
                 "filters": 4,
-                "kernel_initializer": initializers.TruncatedNormal(stddev=0.01),
+                "kernel_initializer": initializers.TruncatedNormal(
+                    stddev=0.01),
                 "kernel_size": 10,
                 "strides": (1, 1),
                 'padding': 'same',
@@ -47,7 +48,8 @@ def cnn2d_process(
             dropout_layer2={"rate": 0.2},
             mlp_layer1={
                 "units": 12,
-                "kernel_initializer": initializers.TruncatedNormal(stddev=0.01),
+                "kernel_initializer": initializers.TruncatedNormal(
+                    stddev=0.01),
                 "activation": "relu"}
         ),
         aug_process_kwargs=dict(
