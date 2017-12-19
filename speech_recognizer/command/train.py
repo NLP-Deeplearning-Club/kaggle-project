@@ -2,7 +2,6 @@ from argparse import Namespace
 import json
 import multiprocessing
 from speech_recognizer.process.utils import REGIST_PROCESS
-from speech_recognizer.process import *
 from .tf_board import run_tf_board
 
 

@@ -6,7 +6,7 @@ from speech_recognizer.process.utils import (
     REGIST_PERPROCESS,
     REGIST_FEATURE_EXTRACT
 )
-from speech_recognizer.libsr import predict
+from .utils import predict
 
 
 def predict_command(args: Namespace)->None:

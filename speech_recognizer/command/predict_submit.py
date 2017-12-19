@@ -10,10 +10,8 @@ from speech_recognizer.process.utils import (
     REGIST_PERPROCESS,
     REGIST_FEATURE_EXTRACT
 )
-from speech_recognizer.libsr import predict
-
-LABEL_LIST = ['yes', 'no', 'up', 'down', 'left',
-              'right', 'on', 'off', 'stop', 'go', 'silence']
+from speech_recognizer.conf import TEST_DATASET_PATH
+from .utils import predict
 
 
 def test_data_gen(process_name, batch_size=200):
@@ -64,17 +62,13 @@ def test_data_gen(process_name, batch_size=200):
 def predict_submit_command(args: Namespace)->None:
     """根据命令行进行训练操作
     """
-    p = Path(__file__).absolute().parent.parent.parent.joinpath(
-        "dataset/test/audio")
+    p = Path(TEST_DATASET_PATH).absolute()
     lenght = len(list(p.iterdir()))
     timenow = strftime("%Y-%m-%d-%H-%M-%S", gmtime())
     sub_name = 'submission_' + "_".join(args.process_name) + \
         '_' + str(timenow) + '.csv'
-    sub_dir = Path("submit_files")
-    if sub_dir.is_dir():
-        sub_file = str(sub_dir.joinpath(sub_name))
-    else:
-        sub_file = sub_name
+
+    sub_file = sub_name
     p_save = Path(sub_file).absolute()
     print("preparing data...")
     batch_size = args.size
@@ -87,9 +81,10 @@ def predict_submit_command(args: Namespace)->None:
             for names, X in gen:
                 lab_zip_list = []
                 for i in args.process_name:
-                    labels = [lab for lab, _ in predict(
+                    labels = predict(
                         i, X[i],
-                        args.batch_size, args.verbose)]
+                        args.batch_size, 
+                        args.verbose)
                     lab_zip_list.append(labels)
                 if len(lab_zip_list) == 1:
                     labels = lab_zip_list[0]

@@ -1,4 +1,3 @@
-from pathlib import Path
 from functools import partial
 from keras import initializers
 from speech_recognizer.libsr.preprocessing import (
@@ -13,7 +12,7 @@ from speech_recognizer.libsr.feature_extract import (
 from speech_recognizer.libsr.data_gen import TrainData
 from speech_recognizer.libsr.models import build_cnn2d_model
 from speech_recognizer.libsr.train import train_generator
-from .utils import regist, get_current_function_name, tb_callback
+from .utils import regist, tb_callback
 
 per = normalize_perprocess
 fe = partial(mfcc, numcep=26, cnn=False)
@@ -61,21 +60,11 @@ def cnn2d_process(
         validation_batch_size=60,  # 验证集的batchsize
         epochs=6):
 
-    p = Path(__file__).absolute()
-    _dir = p.parent.parent
-    func_name = get_current_function_name()
-    index_path = _dir.joinpath(
-        "serialized_models/" + func_name + "_index.json")
-
-    path = _dir.joinpath(
-        "serialized_models/" + func_name + "_model.h5")
-
     if aug_process_kwargs:
         aug = partial(aug_process, **aug_process_kwargs)
     else:
         aug = None
-    data = TrainData(perprocess=per, feature_extract=fe,
-                     index_path=index_path, aug_process=aug)
+    data = TrainData(perprocess=per, feature_extract=fe, aug_process=aug)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)
@@ -89,7 +78,6 @@ def cnn2d_process(
                                     metrics=metrics,
                                     validation_data=validation_gen,
                                     validation_steps=steps,
-                                    callbacks=[tb_callback(func_name)]
+                                    callbacks=[tb_callback("cnn2d_process")]
                                     )
-    trained_model.save(str(path))
-    print("model save done!")
+    return trained_model

@@ -1,13 +1,11 @@
-from argparse import Namespace
-from speech_recognizer.process.utils import REGIST_PROCESS
-from speech_recognizer.process import *
 import subprocess
 from pathlib import Path
+from argparse import Namespace
+from speech_recognizer.conf import LOG_PATH
 
 
 def run_tf_board(process_name):
-    p = Path(__file__).parent.parent.joinpath(
-        "tmp/{}".format(process_name))
+    p = Path(LOG_PATH).joinpath(str(process_name))
     print(p)
     command = ["tensorboard", "--logdir=" + str(p)]
     subprocess.call(command, shell=False)

@@ -9,13 +9,11 @@
 + 验证数据使用生成器生成
 + 验证集每个batch生成60个数据
 """
-from pathlib import Path
 from functools import partial
-from keras.optimizers import Adam
 from speech_recognizer.libsr.preprocessing import (
     normalize_resample_perprocess
 )
-from speech_recognizer.libsr.data_augmentation import(
+from speech_recognizer.libsr.data_augmentation import (
     aug_process
 )
 from speech_recognizer.libsr.feature_extract import (
@@ -24,7 +22,7 @@ from speech_recognizer.libsr.feature_extract import (
 from speech_recognizer.libsr.data_gen import TrainData
 from speech_recognizer.libsr.models import build_basecnn_model
 from speech_recognizer.libsr.train import train_generator
-from .utils import regist, get_current_function_name, tb_callback
+from .utils import regist, tb_callback
 
 per = normalize_resample_perprocess
 fe = partial(log_specgram, cnn=True)
@@ -52,20 +50,11 @@ def cnn_spec_gen_process(
         metrics=['mae', 'accuracy'], train_batch_size=140,
         validation_batch_size=60, epochs=4):
 
-    p = Path(__file__).absolute()
-    _dir = p.parent.parent
-    func_name = get_current_function_name()
-    index_path = _dir.joinpath(
-        "serialized_models/" + func_name + "_index.json")
-
-    path = _dir.joinpath(
-        "serialized_models/" + func_name + "_model.h5")
     if aug_process_kwargs:
         aug = partial(aug_process, **aug_process_kwargs)
     else:
         aug = None
-    data = TrainData(perprocess=per, feature_extract=fe,
-                     index_path=index_path, aug_process=aug)
+    data = TrainData(perprocess=per, feature_extract=fe, aug_process=aug)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)
@@ -79,7 +68,7 @@ def cnn_spec_gen_process(
                                     metrics=metrics,
                                     validation_data=validation_gen,
                                     validation_steps=steps,
-                                    callbacks=[tb_callback(func_name)]
+                                    callbacks=[tb_callback(
+                                        'cnn_spec_gen_process')]
                                     )
-    trained_model.save(str(path))
-    print("model save done!")
+    return trained_model

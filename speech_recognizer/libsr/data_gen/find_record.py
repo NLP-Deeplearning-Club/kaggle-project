@@ -1,17 +1,14 @@
 import math
 import random
 from pathlib import Path
-DEFAULT_DATASET_PATH = Path(__file__).absolute(
-).parent.parent.parent.parent.joinpath("dataset")
-TRAIN_SET = "train/audio"
-TEST_SET = "test/audio"
-
-wanted_words = ['yes', 'no', 'up', 'down',
-                'left', 'right', 'on', 'off', 'stop', 'go']
-possible_labels = ['silence', 'unknown'] + wanted_words
+from speech_recognizer.conf import (
+    TRAIN_DATASET_PATH,
+    WANTED_WORDS
+)
+from speech_recognizer.utils import lab_to_vector
 
 
-def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
+def find_data(dataset_path=TRAIN_DATASET_PATH,
               validation_rate=0.1,
               test_rate=0.1,
               repeat=0,
@@ -39,29 +36,32 @@ def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),
     silence_data = []
     for i in p.iterdir():
         clz = i.name
-        if clz in wanted_words:
+        if clz in WANTED_WORDS:
+            lab = lab_to_vector(clz)
             for j in i.iterdir():
                 item_path = str(j.absolute())
                 not_train_rate = test_rate + validation_rate
                 rate = random.random()
                 if rate > not_train_rate:
-                    train_data.append((item_path, clz))
+                    train_data.append((item_path, lab))
                     if repeat:
                         for _ in range(repeat):
-                            train_data.append((item_path, clz))
+                            train_data.append((item_path, lab))
                 else:
                     if rate < validation_rate:
-                        test_data.append((item_path, clz))
+                        test_data.append((item_path, lab))
                     else:
-                        validation_data.append((item_path, clz))
+                        validation_data.append((item_path, lab))
         elif clz == "_background_noise_":
+            lab = lab_to_vector('silence')
             for j in i.iterdir():
                 item_path = str(j.absolute())
-                silence_data.append((item_path, "silence"))
+                silence_data.append((item_path, lab))
         else:
+            lab = lab_to_vector('unknown')
             for j in i.iterdir():
                 item_path = str(j.absolute())
-                unknown_data.append((item_path, "unknown"))
+                unknown_data.append((item_path, lab))
     len_train_data = len(train_data)
     len_test_data = len(test_data)
     len_validation_data = len(validation_data)

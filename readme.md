@@ -8,7 +8,7 @@
 
 + `speech_recognizer.libsr`
 
-    这个模块是核心部分,在其`__init__.py`中定义了使用model对象和指明过程名字的字符串反序列化后的对象进行预测等操作的方法.
+    这个模块是核心部分
 
     + `speech_recognizer.libsr.train`
 
@@ -16,7 +16,15 @@
 
     + `speech_recognizer.libsr.preprocessing`
 
-        定义了数据预处理的基本组件和组合好的预处理过程,组合好的预处理过程在其子模块`blueprints`中定义
+        定义了数据预处理的基本组件和组合好的预处理过程,要求预处理只能处理sample_rate,wav
+
+    + `speech_recognizer.libsr.data_augmentation`
+
+        定义了数据增强的基本组件和组合好的处理过程.要求返回的是sample_rate,wav
+
+    + `speech_recognizer.libsr.feature_extract`
+
+        定义了数据特征提取的步骤和组合好的处理过程.要求返回的是最终用于输入模型的数据特征
 
     + `speech_recognizer.libsr.models`
 
@@ -26,10 +34,11 @@
 
     用于定义训练过程,也就是如何组合`speech_recognizer.libsr`中定义的方法,其中的`utils.py`中定义了几个实用的对象:
 
-    + `REGIST_PROCESS/REGIST_PERPROCESS`用于保存被注册的训练过程和特征提取过程
+    + `REGIST_PROCESS/REGIST_PERPROCESS/REGIST_FEATURE_EXTRACT`用于保存被注册的训练过程,预处理过程和特征提取过程
     + `tb_cb`预定义好的tensorboard回调函数对象
-    + `get_current_function_name`用于获取当前所在函数函数名的函数,用于统一模型的命名
-    + `regist`将过程,特征提取过程绑定在`REGIST_PROCESS/REGIST_PERPROCESS`中的装饰器
+    + `regist`将过程,特征提取过程绑定在`REGIST_PROCESS/REGIST_PERPROCESS/REGIST_FEATURE_EXTRACT`中的装饰器
+
+    使用该装饰器需要指定预处理过程和特征提取过程作为初始化参数,之后就可以定义训练过程了,如果过程有返回值,那么返回值需要是keras模型,装饰器也会自动将这个模型保存到默认位置
 
 + `speech_recognizer.command`
 
@@ -41,7 +50,24 @@
 
 + `speech_recognizer.serialized_models`
 
-    用于保存已经训练好的模型数据和标签onehot对应数据
+    默认的用于保存已经训练好的模型数据
+
++ `speech_recognizer.conf`
+
+    用于配置这个项目的文件.其中需要定义的有:
+
+    + `TRAIN_DATASET_PATH` 训练数据集
+    + `TEST_DATASET_PATH` 测试数据集
+    + `MODEL_PATH` 模型序列化后存放位置
+    + `LOG_PATH` tensorboard回调函数保存模型训练时log的位置
+    + `WANTED_WORDS` 指定的需要的单词
+    + `POSSIBLE_LABELS` 指定的合法的标签
+
++ `speech_recognizer.utils`
+
+    用于定义一些通用的方法,其中包括:
+    + `lab_to_vector`将标签转为onehot向量
+    + `vector_to_lab`将向量转化为标签
 
 ## 使用方式
 

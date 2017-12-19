@@ -2,8 +2,8 @@ import inspect
 from functools import wraps
 from pathlib import Path
 import keras
-p = Path(__file__).absolute()
-_dir = p.parent.parent
+from speech_recognizer.conf import MODEL_PATH, LOG_PATH
+
 REGIST_PROCESS = {}
 REGIST_PERPROCESS = {}
 REGIST_FEATURE_EXTRACT = {}
@@ -31,7 +31,7 @@ def tb_callback(process_name, histogram_freq=0,
         (function): 回调函数
     """
     return keras.callbacks.TensorBoard(
-        log_dir=str(_dir.joinpath("tmp/{}".format(process_name))),
+        log_dir=str(Path(LOG_PATH).joinpath(process_name)),
         histogram_freq=histogram_freq,
         write_graph=write_graph, write_images=write_images,
         embeddings_freq=embeddings_freq,
@@ -62,18 +62,20 @@ class regist:
         self.feature_extract = feature_extract
 
     def __call__(self, func):
-        REGIST_PROCESS[func.__name__] = func
         REGIST_PERPROCESS[func.__name__] = self.preprocess
         REGIST_FEATURE_EXTRACT[func.__name__] = self.feature_extract
-        sig = inspect.signature(func)
+        _dir = Path(MODEL_PATH)
+        path = _dir.joinpath(func.__name__ + "_model.h5")
 
         @wraps(func)
         def wrapper(*args, **kwargs):
-            bound_args = sig.bind(*args, **kwargs)
-            for kw, arg in bound_args.items():
-                print("bound_args:")
-                print(kw)
-                print(args)
-            return func(*args, **kwargs)
-
+            trained_model = func(*args, **kwargs)
+            if trained_model:
+                trained_model.save(str(path))
+                print("model save done!")
+                return True
+            else:
+                print("no model returned")
+                return False
+        REGIST_PROCESS[func.__name__] = wrapper
         return wrapper

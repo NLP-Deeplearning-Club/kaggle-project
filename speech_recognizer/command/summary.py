@@ -1,5 +1,5 @@
 from argparse import Namespace
-from speech_recognizer.libsr import summary
+from .utils import summary
 
 
 def summary_command(args: Namespace)->None:
