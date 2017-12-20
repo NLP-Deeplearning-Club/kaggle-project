@@ -1,4 +1,5 @@
 from functools import partial
+from keras import regularizers
 from speech_recognizer.libsr.preprocessing import (
     normalize_perprocess
 )
@@ -25,7 +26,9 @@ def lstm_attention_process(
             input_shape=(99, 26),
             lstm_layer={
                 'units': 100,
-                'return_sequences': True},
+                'return_sequences': True,
+                'kernel_regularizer': regularizers.l2(0.005),
+            },
             attention_3d_layer={
                 "time_step": 99,
                 "single_attention_vector": False}),
@@ -42,7 +45,8 @@ def lstm_attention_process(
         aug = None
     data = TrainData(perprocess=per,
                      feature_extract=fe,
-                     aug_process=aug)
+                     aug_process=aug,
+                     repeat=5)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)
