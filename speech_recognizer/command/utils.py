@@ -1,6 +1,6 @@
 from pathlib import Path
 from keras.models import load_model
-from speech_recognizer.conf import MODEL_PATH
+from speech_recognizer.conf import MODEL_PATH, CUSTOM_OBJECT
 from speech_recognizer.utils import vector_to_lab
 from speech_recognizer.process.utils import REGIST_PROCESS
 
@@ -24,7 +24,7 @@ def _load(process_name):
         raise AttributeError(
             "there is no model for {process_name}!".format(process_name=process_name))
     else:
-        return load_model(str(path))
+        return load_model(str(path), custom_objects=CUSTOM_OBJECT)
 
 
 def predict(process_name, featureset, batch_size=32, verbose=0):

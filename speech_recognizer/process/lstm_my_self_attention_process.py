@@ -1,16 +1,17 @@
 from functools import partial
-from keras import regularizers
 from speech_recognizer.libsr.preprocessing import (
     normalize_perprocess
 )
-from speech_recognizer.libsr.data_augmentation import(
+from speech_recognizer.libsr.data_augmentation import (
     aug_process
 )
 from speech_recognizer.libsr.feature_extract import (
     mfcc
 )
 from speech_recognizer.libsr.data_gen import TrainData
-from speech_recognizer.libsr.models import build_lstm_myattention_model
+from speech_recognizer.libsr.models import (
+    build_lstm_my_self_dot_attention_model
+)
 from speech_recognizer.libsr.train import train_generator
 from speech_recognizer.utils import vector_to_lab
 from .utils import regist, tb_callback
@@ -21,15 +22,14 @@ fe = partial(mfcc, numcep=26, cnn=False)
 
 
 @regist(per, fe)
-def lstm_my_attention_process(
+def lstm_my_self_attention_process(
         model_kwargs=dict(
             input_shape=(99, 26),
             lstm_layer={
                 'units': 99,
                 'return_sequences': True},
             self_attention_1d_layer={
-                'kernel_size': (15, 30),
-                'similarity': "additive"}
+                'similarity': "dot_product"}
         ),
         aug_process_kwargs=dict(
             time_shift=2000,
@@ -51,18 +51,19 @@ def lstm_my_attention_process(
     validation_gen = data.validation_gen(validation_batch_size)
     steps = next(validation_gen)
 
-    trained_model = train_generator(build_lstm_myattention_model(**model_kwargs),
-                                    train_gen,
-                                    steps_per_epoch=lenght,
-                                    epochs=epochs,
-                                    optimizer=optimizer,
-                                    loss=loss,
-                                    metrics=metrics,
-                                    validation_data=validation_gen,
-                                    validation_steps=steps,
-                                    callbacks=[tb_callback(
-                                        "lstm_my_attention_process")]
-                                    )
+    trained_model = train_generator(
+        build_lstm_my_self_dot_attention_model(**model_kwargs),
+        train_gen,
+        steps_per_epoch=lenght,
+        epochs=epochs,
+        optimizer=optimizer,
+        loss=loss,
+        metrics=metrics,
+        validation_data=validation_gen,
+        validation_steps=steps,
+        callbacks=[tb_callback(
+            "lstm_my_self_attention_process")]
+    )
     test_datas, test_label_vectors = data.test_data
     pre_lab = [vector_to_lab(i) for i in trained_model.predict(test_datas)]
     lab = [vector_to_lab(i) for i in test_label_vectors]

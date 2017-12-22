@@ -41,10 +41,12 @@ class SelfAttention1DLayer(Layer):
                 'hyperparameter kernel_size!'
             )
         if similarity != "additive" and kernel_size:
-            raise ValueError(
+            print(kernel_size)
+            print(
                 'only additive similarity support '
                 'hyperparameter kernel_size!'
             )
+            kernel_size = None
 
         if (isinstance(
             kernel_size,
@@ -137,7 +139,7 @@ class SelfAttention1DLayer(Layer):
         return sim
 
     def _call_attention(self, Source):
-        """self-attention就是通过相似度函数计算得的相似矩阵过softmax后与自身点乘得到
+        r"""self-attention就是通过相似度函数计算得的相似矩阵过softmax后与自身点乘得到
 
         .. math::  A = Softmax(Similarity(Source))
         .. math::  C = A \cdot Source
@@ -157,6 +159,16 @@ class SelfAttention1DLayer(Layer):
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.kernel_size[0], self.dim)
+
+    def get_config(self):
+        config = {
+            'similarity': self.similarity,
+            'kernel_size': self.kernel_size,
+            'kernel_initializer': self.kernel_initializer,
+            'wk_kernel_initializer': self.wk_kernel_initializer
+        }
+        base_config = super().get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
 class SelfAttention2DLayer(SelfAttention1DLayer):
@@ -183,6 +195,7 @@ class SelfAttention2DLayer(SelfAttention1DLayer):
                  wk_kernel_initializer='glorot_uniform',
                  **kwargs):
         self.output_size = output_size
+        self.d_a = d_a
         if similarity == "additive":
             if d_a is not None and output_size is not None and len(
                     output_size) == 2:
@@ -220,7 +233,7 @@ class SelfAttention2DLayer(SelfAttention1DLayer):
         super(SelfAttention1DLayer, self).build(input_shape)
 
     def call(self, inputs):
-        """self-attention就是通过相似度函数计算得的相似矩阵过softmax后与自身点乘得到
+        r"""self-attention就是通过相似度函数计算得的相似矩阵过softmax后与自身点乘得到
 
         .. math::  A = Softmax(Similarity(Source))
         .. math::  C = A \cdot Source
@@ -241,8 +254,16 @@ class SelfAttention2DLayer(SelfAttention1DLayer):
         return result
 
     def compute_output_shape(self, input_shape):
-        return (input_shape[0],  self.output_size[0],
+        return (input_shape[0], self.output_size[0],
                 self.output_size[1], self.dim)
+
+    def get_config(self):
+        config = {
+            "output_size": self.output_size,
+            "d_a": self.d_a
+        }
+        base_config = super().get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
 __all__ = ["SelfAttention1DLayer", "SelfAttention2DLayer"]

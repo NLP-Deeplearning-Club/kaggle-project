@@ -1,4 +1,6 @@
 from .cnn_3_layer import build_model as build_basecnn_model
 from .lstm_attention import build_model as build_lstm_attention_model
 from .cnn2d_layer import build_model as build_cnn2d_model
-from .lstm_my_attention import build_model as build_lstm_myattention_model
+from .lstm_my_self_dot_attention import (
+    build_model as build_lstm_my_self_dot_attention_model
+)
