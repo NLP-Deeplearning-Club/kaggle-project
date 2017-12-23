@@ -7,3 +7,4 @@ tensorflow
 keras
 tqdm
 h5py
+keras_attention_block
