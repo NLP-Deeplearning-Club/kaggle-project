@@ -2,7 +2,7 @@ from keras.layers import (
     Input, Flatten,
     Permute, Reshape,
     Lambda, RepeatVector,
-    merge, Dense,
+    merge, Dense, Dropout,
     LSTM, Bidirectional
 )
 from keras.models import Model
@@ -49,8 +49,10 @@ def build_model(input_shape=(99, 26),
     inputs = Input(shape=input_shape)
     # RNN Layer
     rnn_out = Bidirectional(LSTM(**lstm_layer))(inputs)
+    rnn_out = Dropout(0.2)(rnn_out)
     # Attention Layer
     attention_mul = Attention3DLayer(**attention_3d_layer)(rnn_out)
+
     attention_mul = Flatten()(attention_mul)
     output = Dense(12, activation='softmax')(attention_mul)
     model = Model(input=[inputs], output=output)

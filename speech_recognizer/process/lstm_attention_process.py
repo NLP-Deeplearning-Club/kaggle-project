@@ -1,5 +1,6 @@
 from functools import partial
 from keras import regularizers
+from keras.callbacks import EarlyStopping
 from speech_recognizer.libsr.preprocessing import (
     normalize_perprocess
 )
@@ -27,7 +28,7 @@ def lstm_attention_process(
             lstm_layer={
                 'units': 100,
                 'return_sequences': True,
-                'kernel_regularizer': regularizers.l2(0.005),
+                'kernel_regularizer': regularizers.l2(0.01),
             },
             attention_3d_layer={
                 "time_step": 99,
@@ -46,6 +47,8 @@ def lstm_attention_process(
     data = TrainData(perprocess=per,
                      feature_extract=fe,
                      aug_process=aug,
+                     validation_rate=0.2,
+                     test_rate=0.01,
                      repeat=5)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
@@ -61,8 +64,14 @@ def lstm_attention_process(
                                     metrics=metrics,
                                     validation_data=validation_gen,
                                     validation_steps=steps,
-                                    callbacks=[tb_callback(
-                                        "lstm_attention_process")]
+                                    callbacks=[
+                                        tb_callback(
+                                            "lstm_attention_process"),
+                                        EarlyStopping(
+                                            monitor='val_loss',
+                                            patience=0,
+                                            verbose=0,
+                                            mode='auto')]
                                     )
     test_datas, test_label_vectors = data.test_data
     pre_lab = [vector_to_lab(i) for i in trained_model.predict(test_datas)]
