@@ -12,7 +12,7 @@ from speech_recognizer.libsr.data_gen import TrainData
 from speech_recognizer.libsr.models import build_lstm_attention_model
 from speech_recognizer.libsr.train import train_generator
 from speech_recognizer.utils import vector_to_lab
-from .utils import regist, tb_callback
+from .utils import regist, tb_callback, model_report
 
 
 per = normalize_perprocess
@@ -33,9 +33,12 @@ def lstm_attention_process(
             time_shift=2000,
             background_volume_range=0.1,
             background_frequency=0.1),  # 数据增强
-        optimizer='adam', loss='categorical_crossentropy',  # 训练用的参数
-        metrics=['mae', 'accuracy'], train_batch_size=140,
-        validation_batch_size=60, epochs=4):
+        optimizer='adam',
+        loss='categorical_crossentropy',  # 训练用的参数
+        metrics=['mae', 'accuracy'],
+        train_batch_size=140,
+        validation_batch_size=60,
+        epochs=1):
     if aug_process_kwargs:
         aug = partial(aug_process, **aug_process_kwargs)
     else:
@@ -60,10 +63,5 @@ def lstm_attention_process(
                                     callbacks=[tb_callback(
                                         "lstm_attention_process")]
                                     )
-    test_datas, test_label_vectors = data.test_data
-    pre_lab = [vector_to_lab(i) for i in trained_model.predict(test_datas)]
-    lab = [vector_to_lab(i) for i in test_label_vectors]
-    z = zip(pre_lab, lab)
-    for i in z:
-        print(i)
-    return trained_model
+    acc = model_report(trained_model, data.test_data, average='macro')
+    return trained_model, acc

@@ -1,12 +1,14 @@
+import glob
 from pathlib import Path
+from collections import Counter
 from keras.models import load_model
 from speech_recognizer.conf import MODEL_PATH
 from speech_recognizer.utils import vector_to_lab
 from speech_recognizer.process.utils import REGIST_PROCESS
 
 
-def _load(process_name):
-    """使用process_name找到对应的模型对象
+def _load(process_name, mulit=False):
+    """使用process_name找到对应的模型对象,如果有直接是名字的,那就用直接是名字的模型,如果没有,就找时间戳最近的模型
     Parameters:
         process_name (str): - 过程函数名
 
@@ -19,15 +21,38 @@ def _load(process_name):
     if process_name not in REGIST_PROCESS:
         raise AttributeError("unknown process name!")
     _dir = Path(MODEL_PATH)
+
     path = _dir.joinpath(process_name + "_model.h5")
-    if not path.exists():
-        raise AttributeError(
-            "there is no model for {process_name}!".format(process_name=process_name))
+    if mulit is False:
+        if not path.exists():
+            paths = glob.glob(str(_dir) + '/' + process_name + "_model.h5*")
+            if len(paths) == 0:
+                raise AttributeError(
+                    "there is no model for {process_name}!".format(
+                        process_name=process_name))
+            else:
+                return load_model(
+                    str(max(paths, key=lambda x: int(x.split("_")[-1]))))
+        else:
+            return load_model(str(path))
     else:
-        return load_model(str(path))
+        models = []
+        if path.exists():
+            models.append(load_model(str(path)))
+        paths = glob.glob(str(_dir) + '/' + process_name + "_model.h5*")
+        if len(paths) != 0:
+            for mp in paths:
+                models.append(load_model(str(mp)))
+        if len(models) == 0:
+            raise AttributeError(
+                "there is no model for {process_name}!".format(
+                    process_name=process_name))
+        else:
+            return models
 
 
-def predict(process_name, featureset, batch_size=32, verbose=0):
+def predict(process_name, featureset, *,
+            mulit=False, batch_size=32, verbose=0):
     """指定过程名和特征集预测标签
 
     Parameters:
@@ -40,12 +65,33 @@ def predict(process_name, featureset, batch_size=32, verbose=0):
         (List[Tuple[label,probability]]): 由featureset长度个(最大可能性标签,最大可能性)对组成的list
     """
     if isinstance(process_name, str):
-        model = _load(process_name)
+        model = _load(process_name, mulit=mulit)
     else:
         model = process_name
-    pre = model.predict(featureset, batch_size=batch_size, verbose=verbose)
-    result = [vector_to_lab(i) for i in pre]
-    return result
+    if mulit is False:
+        pre = model.predict(featureset, batch_size=batch_size, verbose=verbose)
+        result = [vector_to_lab(i) for i in pre]
+        return result
+    else:
+        results = []
+        for m in model:
+            pre = m.predict(
+                featureset, batch_size=batch_size, verbose=verbose)
+            sigle_result = [vector_to_lab(i) for i in pre]
+            results.append(sigle_result)
+        result = []
+        print("bagging start")
+        for i in zip(*results):
+            c = Counter(sorted(i))
+            print("*****************************")
+            print(c)
+            temp = max(dict(c).items(),
+                       key=lambda x: x[1])
+            label = temp[0]
+            print(label)
+            result.append(label)
+            print("*****************************")
+        return result
 
 
 def summary(process_name):

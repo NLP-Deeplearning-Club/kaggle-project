@@ -43,9 +43,12 @@ class Command:
             description='训练一个模型,可以使用-b标识是否要使用tensorboard可选的有:{}'.format(",".join(
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str)
+        parser.add_argument("-n", "--number", type=int, default=1)
         parser.add_argument("-b", "--tf_board", action="store_true")
         parser.add_argument("-c", "--use_config", type=open,
                             help="使用json形式保存的配置文件来训练")
+        parser.add_argument("-g", "--grid_search", type=open,
+                            help="使用json形式保存的配置文件来做grid search训练")
         parser.set_defaults(func=train_command)
         args = parser.parse_args(self.argv[1:])
         args.func(args)
@@ -71,6 +74,7 @@ class Command:
 可选的模型有:{}'''.format(",".join(
                 list(REGIST_PROCESS.keys()))))
         parser.add_argument("process_name", type=str, nargs='+')
+        parser.add_argument("-b", "--bagging", action="store_true")
         parser.add_argument('-s', "--size", type=int, default=30000)
         parser.add_argument("--batch_size", type=int, default=30)
         parser.add_argument("--verbose", type=int, default=0)
