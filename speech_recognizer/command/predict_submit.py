@@ -80,11 +80,16 @@ def predict_submit_command(args: Namespace)->None:
         with tqdm(total=lenght) as schedule:
             for names, X in gen:
                 lab_zip_list = []
+                if args.bagging:
+                    mulit = True
+                else:
+                    mulit = False
                 for i in args.process_name:
                     labels = predict(
                         i, X[i],
-                        args.batch_size, 
-                        args.verbose)
+                        mulit=mulit,
+                        batch_size=args.batch_size,
+                        verbose=args.verbose)
                     lab_zip_list.append(labels)
                 if len(lab_zip_list) == 1:
                     labels = lab_zip_list[0]
