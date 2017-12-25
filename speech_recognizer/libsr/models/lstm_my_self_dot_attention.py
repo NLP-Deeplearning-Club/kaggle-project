@@ -11,7 +11,7 @@ def build_model(input_shape=(99, 26),
                     'units': 99,
                     'return_sequences': True},
                 self_attention_1d_layer={
-                    'similarity': "dot_product"}):
+                    'similarity': "linear"}):
     inputs = Input(shape=input_shape)
     # RNN Layer
     rnn_out = Bidirectional(LSTM(**lstm_layer))(inputs)

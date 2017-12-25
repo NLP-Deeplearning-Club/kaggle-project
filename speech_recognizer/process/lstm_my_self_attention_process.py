@@ -29,7 +29,7 @@ def lstm_my_self_attention_process(
                 'units': 99,
                 'return_sequences': True},
             self_attention_1d_layer={
-                'similarity': "dot_product"}
+                'similarity': "linear"}
         ),
         aug_process_kwargs=dict(
             time_shift=2000,
