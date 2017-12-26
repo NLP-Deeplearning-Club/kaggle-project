@@ -23,19 +23,6 @@ def Attention3DLayer(time_step, single_attention_vector=False):
             [inputs, a_probs], name='attention_mul', mode='mul')
         return output_attention_mul
     return wrap
-# def attention_3d_block(inputs, SINGLE_ATTENTION_VECTOR=False):
-#     # inputs.shape = (batch_size, time_steps, input_dim)
-#     input_dim = int(inputs.shape[2])
-#     a = Permute((2, 1))(inputs)
-#     a = Reshape((input_dim, TIME_STEPS))(a)
-#     a = Dense(TIME_STEPS, activation='softmax')(a)
-#     if SINGLE_ATTENTION_VECTOR:
-#         a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
-#         a = RepeatVector(input_dim)(a)
-#     a_probs = Permute((2, 1), name='attention_vec')(a)
-#     output_attention_mul = merge(
-#         [inputs, a_probs], name='attention_mul', mode='mul')
-#     return output_attention_mul
 
 
 def build_model(input_shape=(99, 26),
@@ -52,8 +39,8 @@ def build_model(input_shape=(99, 26),
     rnn_out = Dropout(0.2)(rnn_out)
     # Attention Layer
     attention_mul = Attention3DLayer(**attention_3d_layer)(rnn_out)
-
     attention_mul = Flatten()(attention_mul)
+    attention_mul = Dropout(0.2)(attention_mul)
     output = Dense(12, activation='softmax')(attention_mul)
     model = Model(input=[inputs], output=output)
     return model

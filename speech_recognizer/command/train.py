@@ -7,7 +7,9 @@ from .tf_board import run_tf_board
 
 def _train_single(process, number, kwargs=None):
     result = []
+    print()
     for i in range(number):
+        print("model {}".format(i))
         if kwargs:
             res = process(**kwargs)
         else:
@@ -28,6 +30,7 @@ def train_command(args: Namespace)->None:
         p.start()
 
     process = REGIST_PROCESS.get(args.process_name)
+    kwargs = None
     if args.use_config:
         kwargs = json.load(args.use_config)
         args.use_config.close()

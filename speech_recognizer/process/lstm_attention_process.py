@@ -42,7 +42,7 @@ def lstm_attention_process(
         metrics=['mae', 'accuracy'],
         train_batch_size=140,
         validation_batch_size=60,
-        epochs=1):
+        epochs=4):
     if aug_process_kwargs:
         aug = partial(aug_process, **aug_process_kwargs)
     else:
@@ -52,12 +52,13 @@ def lstm_attention_process(
                      aug_process=aug,
                      validation_rate=0.2,
                      test_rate=0.01,
+                     unknown_rate=0.2,
+                     silence_rate=0.1,
                      repeat=5)
     train_gen = data.train_gen(train_batch_size)
     lenght = next(train_gen)
     validation_gen = data.validation_gen(validation_batch_size)
     steps = next(validation_gen)
-
     trained_model = train_generator(build_lstm_attention_model(**model_kwargs),
                                     train_gen,
                                     steps_per_epoch=lenght,
