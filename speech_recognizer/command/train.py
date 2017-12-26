@@ -28,6 +28,7 @@ def train_command(args: Namespace)->None:
         p.start()
 
     process = REGIST_PROCESS.get(args.process_name)
+    kwargs = None
     if args.use_config:
         kwargs = json.load(args.use_config)
         args.use_config.close()

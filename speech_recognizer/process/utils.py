@@ -83,6 +83,11 @@ class regist:
 
         @wraps(func)
         def wrapper(*args, **kwargs):
+            _dir = Path(MODEL_PATH)
+            train_time = int(time.time())
+            path = _dir.joinpath(
+                func.__name__ + "_model.h5" + "_" + str(
+                    train_time))
             trained_model = func(*args, **kwargs)
             if len(trained_model) == 1:
                 trained_model.save(str(path))
