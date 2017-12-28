@@ -1,0 +1,295 @@
+<<<<<<< HEAD
+=======
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AUTHOR	../setup.py	/^AUTHOR = '87'$/;"	kind:variable	line:14
+AUTHOR_EMAIL	../setup.py	/^AUTHOR_EMAIL = ''$/;"	kind:variable	line:15
+Adam	../speech_recognizer\process\cnn_spec_process.py	/^from keras.optimizers import Adam$/;"	kind:namespace	line:13
+CLASSIFIERS	../setup.py	/^CLASSIFIERS = [$/;"	kind:variable	line:17
+Command	../speech_recognizer\main.py	/^class Command:$/;"	kind:class	line:11
+DEFAULT_DATASET_PATH	../speech_recognizer\libsr\data_gen\find_record.py	/^DEFAULT_DATASET_PATH = Path(__file__).absolute($/;"	kind:variable	line:4
+DESCRIPTION	../setup.py	/^DESCRIPTION = 'simple tools'$/;"	kind:variable	line:12
+HERE	../setup.py	/^HERE = path.abspath(path.dirname(__file__))$/;"	kind:variable	line:29
+KEYWORDS	../setup.py	/^KEYWORDS = ("tools",)$/;"	kind:variable	line:25
+LABEL_LIST	../speech_recognizer\command\predict_submit.py	/^LABEL_LIST = ['yes', 'no', 'up', 'down', 'left',$/;"	kind:variable	line:12
+LICENSE	../setup.py	/^LICENSE = 'MIT'$/;"	kind:variable	line:16
+LONG_DESCRIPTION	../setup.py	/^    LONG_DESCRIPTION = f.read()$/;"	kind:variable	line:31
+Namespace	../speech_recognizer\command\predict.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
+Namespace	../speech_recognizer\command\predict_submit.py	/^from argparse import Namespace$/;"	kind:namespace	line:2
+Namespace	../speech_recognizer\command\summary.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
+Namespace	../speech_recognizer\command\tf_board.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
+Namespace	../speech_recognizer\command\train.py	/^from argparse import Namespace$/;"	kind:namespace	line:1
+Options	../setup.py	/^from Cython.Compiler import Options$/;"	kind:namespace	line:5
+PACKAGES	../setup.py	/^PACKAGES = find_packages(exclude=['contrib', 'docs', 'test'])$/;"	kind:variable	line:26
+PROJECTNAME	../setup.py	/^PROJECTNAME = 'speech_recognizer'$/;"	kind:variable	line:10
+Path	../speech_recognizer\command\predict.py	/^from pathlib import Path$/;"	kind:namespace	line:2
+Path	../speech_recognizer\command\predict_submit.py	/^from pathlib import Path$/;"	kind:namespace	line:1
+Path	../speech_recognizer\command\tf_board.py	/^from pathlib import Path$/;"	kind:namespace	line:5
+Path	../speech_recognizer\libsr\__init__.py	/^from pathlib import Path$/;"	kind:namespace	line:1
+Path	../speech_recognizer\libsr\data_gen\find_record.py	/^from pathlib import Path$/;"	kind:namespace	line:3
+Path	../speech_recognizer\process\cnn_spec_process.py	/^from pathlib import Path$/;"	kind:namespace	line:12
+Path	../speech_recognizer\process\utils.py	/^from pathlib import Path$/;"	kind:namespace	line:2
+REGIST_PERPROCESS	../speech_recognizer\process\utils.py	/^REGIST_PERPROCESS = {}$/;"	kind:variable	line:7
+REGIST_PROCESS	../speech_recognizer\command\tf_board.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:2
+REGIST_PROCESS	../speech_recognizer\command\train.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:3
+REGIST_PROCESS	../speech_recognizer\libsr\__init__.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:4
+REGIST_PROCESS	../speech_recognizer\main.py	/^from speech_recognizer.process.utils import REGIST_PROCESS$/;"	kind:namespace	line:8
+REGIST_PROCESS	../speech_recognizer\process\utils.py	/^REGIST_PROCESS = {}$/;"	kind:variable	line:6
+REQUIREMETS	../setup.py	/^    REQUIREMETS = f.readlines()$/;"	kind:variable	line:35
+REQUIREMETS_DEV	../setup.py	/^    REQUIREMETS_DEV = f.readlines()$/;"	kind:variable	line:38
+REQUIREMETS_DEV_FILE	../setup.py	/^REQUIREMETS_DEV_FILE = 'requirements_dev.txt'$/;"	kind:variable	line:7
+REQUIREMETS_DIR	../setup.py	/^REQUIREMETS_DIR = path.join(HERE,"requirements")$/;"	kind:variable	line:32
+REQUIREMETS_FILE	../setup.py	/^REQUIREMETS_FILE = 'requirements.txt'$/;"	kind:variable	line:9
+REQUIREMETS_TEST	../setup.py	/^    REQUIREMETS_TEST = f.readlines()$/;"	kind:variable	line:41
+REQUIREMETS_TEST_FILE	../setup.py	/^REQUIREMETS_TEST_FILE = 'requirements_test.txt'$/;"	kind:variable	line:8
+SGD	../speech_recognizer\libsr\train.py	/^from keras.optimizers import SGD$/;"	kind:namespace	line:1
+Sequential	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras.models import Sequential$/;"	kind:namespace	line:2
+TEST_SET	../speech_recognizer\libsr\data_gen\find_record.py	/^TEST_SET = "test\/audio"$/;"	kind:variable	line:7
+TRAIN_SET	../speech_recognizer\libsr\data_gen\find_record.py	/^TRAIN_SET = "train\/audio"$/;"	kind:variable	line:6
+TrainData	../speech_recognizer\libsr\data_gen\__init__.py	/^from .tran_data import TrainData$/;"	kind:namespace	line:1
+TrainData	../speech_recognizer\libsr\data_gen\tran_data.py	/^class TrainData:$/;"	kind:class	line:8
+TrainData	../speech_recognizer\process\cnn_spec_process.py	/^from speech_recognizer.libsr.data_gen import TrainData$/;"	kind:namespace	line:17
+URL	../setup.py	/^URL = ''$/;"	kind:variable	line:13
+VERSION	../setup.py	/^VERSION = '0.0.1'$/;"	kind:variable	line:11
+ZIP_SAFE	../setup.py	/^ZIP_SAFE = False$/;"	kind:variable	line:27
+__call__	../speech_recognizer\process\utils.py	/^    def __call__(self, func):$/;"	kind:member	line:61
+__init__	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def __init__(self, perprocess,$/;"	kind:member	line:86
+__init__	../speech_recognizer\main.py	/^    def __init__(self, argv):$/;"	kind:member	line:15
+__init__	../speech_recognizer\process\utils.py	/^    def __init__(self, preprocess):$/;"	kind:member	line:58
+__init__.py	../speech_recognizer\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\command\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\data_augmentation\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\data_augmentation\steps\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\data_gen\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\models\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\libsr\preprocessing\__init__.py	1;"	kind:file	line:1
+__init__.py	../speech_recognizer\process\__init__.py	1;"	kind:file	line:1
+_batch_gen	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def _batch_gen(self, dataset, batch_size, save=False):$/;"	kind:member	line:161
+_data_gen	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def _data_gen(perprocess, data,$/;"	kind:member	line:28
+_dir	../speech_recognizer\process\utils.py	/^_dir = p.parent.parent$/;"	kind:variable	line:5
+_get_data	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def _get_data(self, dataset, save=False):$/;"	kind:member	line:136
+_get_longest_period	../speech_recognizer\libsr\preprocessing\steps\denoising.py	/^def _get_longest_period(seg_keep_array):$/;"	kind:function	line:79
+_group_consecutives	../speech_recognizer\libsr\preprocessing\steps\denoising.py	/^def _group_consecutives(vals, step=0):$/;"	kind:function	line:64
+_load	../speech_recognizer\libsr\__init__.py	/^def _load(process_name):$/;"	kind:function	line:7
+_load_index	../speech_recognizer\libsr\__init__.py	/^def _load_index(process_name):$/;"	kind:function	line:30
+_load_wav_file	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^def _load_wav_file(filename):$/;"	kind:function	line:61
+_load_wav_file	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^def _load_wav_file(filename):$/;"	kind:function	line:40
+_pick_random_noise	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^def _pick_random_noise():$/;"	kind:function	line:53
+_split_by_length	../speech_recognizer\libsr\preprocessing\steps\denoising.py	/^def _split_by_length(wav, seg_length):$/;"	kind:function	line:48
+activations	../speech_recognizer\libsr\models\cnn_3_layer.py	/^from keras import activations$/;"	kind:namespace	line:1
+argparse	../speech_recognizer\main.py	/^import argparse$/;"	kind:namespace	line:2
+aug_process	../speech_recognizer\libsr\data_augmentation\__init__.py	/^from .augmentation_process import aug_process/;"	kind:namespace	line:1
+aug_process	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	/^def aug_process(wav, label, mode='train',$/;"	kind:function	line:7
+augmentation_process.py	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	1;"	kind:file	line:1
+author	../setup.py	/^    author=AUTHOR,$/;"	kind:variable	line:55
+author_email	../setup.py	/^    author_email=AUTHOR_EMAIL,$/;"	kind:variable	line:56
+build_basecnn_model	../speech_recognizer\libsr\models\__init__.py	/^from .cnn_3_layer import build_model as build_basecnn_model$/;"	kind:namespace	line:1
+build_basecnn_model	../speech_recognizer\process\cnn_spec_process.py	/^from speech_recognizer.libsr.models import build_basecnn_model$/;"	kind:namespace	line:18
+build_model	../speech_recognizer\libsr\models\cnn_3_layer.py	/^def build_model(input_shape=(99, 81, 1),$/;"	kind:function	line:13
+chop_audio_gen	../speech_recognizer\libsr\preprocessing\steps\padding.py	/^def chop_audio_gen(samples, L=16000, num=20):$/;"	kind:function	line:41
+classifiers	../setup.py	/^    classifiers=CLASSIFIERS,$/;"	kind:variable	line:58
+cnn_3_layer.py	../speech_recognizer\libsr\models\cnn_3_layer.py	1;"	kind:file	line:1
+cnn_spec_gen_process	../speech_recognizer\process\__init__.py	/^from .cnn_spec_process import cnn_spec_gen_process$/;"	kind:namespace	line:1
+cnn_spec_gen_process	../speech_recognizer\process\cnn_spec_process.py	/^def cnn_spec_gen_process($/;"	kind:function	line:24
+cnn_spec_process.py	../speech_recognizer\process\cnn_spec_process.py	1;"	kind:file	line:1
+complexSpectrum	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^complexSpectrum = numpy.fft(signal)$/;"	kind:variable	line:10
+custom_fft	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	/^def custom_fft(samples, sample_rate):$/;"	kind:function	line:9
+custom_fft.py	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	1;"	kind:file	line:1
+custom_fft_from_path	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	/^def custom_fft_from_path(record_path):$/;"	kind:function	line:27
+cythonize	../setup.py	/^from Cython.Build import cythonize$/;"	kind:namespace	line:4
+data_files	../setup.py	/^    data_files=[('requirements', ['requirements\/requirements.txt', 'requirements\/requirements_dev.txt', 'requirements\/requirements_test.txt'])]$/;"	kind:variable	line:70
+dct	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^from scipy.fftpack import dct$/;"	kind:namespace	line:2
+dctSpectrum	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^dctSpectrum = dct(logSpectrum, type=2)  # MFCC :)$/;"	kind:variable	line:14
+denoising.py	../speech_recognizer\libsr\preprocessing\steps\denoising.py	1;"	kind:file	line:1
+description	../setup.py	/^    description=DESCRIPTION,$/;"	kind:variable	line:52
+desired_samples.py	../speech_recognizer\libsr\data_augmentation\steps\desired_samples.py	1;"	kind:file	line:1
+desired_samples_wav	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	/^from .steps.desired_samples import desired_samples_wav$/;"	kind:namespace	line:3
+desired_samples_wav	../speech_recognizer\libsr\data_augmentation\steps\desired_samples.py	/^def desired_samples_wav(wav, desired_samples=16000):$/;"	kind:function	line:5
+ext_modules	../setup.py	/^    ext_modules=cythonize(extensions),$/;"	kind:variable	line:67
+extensions	../setup.py	/^extensions = [$/;"	kind:variable	line:43
+extras_require	../setup.py	/^    extras_require={$/;"	kind:variable	line:63
+fft	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	/^from scipy.fftpack import fft$/;"	kind:namespace	line:6
+filteredSpectrum	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^filteredSpectrum = numpy.dot(powerSpectrum, melFilterBank())$/;"	kind:variable	line:12
+find_data	../speech_recognizer\libsr\data_gen\find_record.py	/^def find_data(dataset_path=str(DEFAULT_DATASET_PATH.joinpath(TRAIN_SET)),$/;"	kind:function	line:14
+find_data	../speech_recognizer\libsr\data_gen\tran_data.py	/^from .find_record import find_data$/;"	kind:namespace	line:5
+find_packages	../setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:2
+find_record.py	../speech_recognizer\libsr\data_gen\find_record.py	1;"	kind:file	line:1
+freqToMel	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^def freqToMel(freq):$/;"	kind:function	line:49
+get_current_function_name	../speech_recognizer\process\cnn_spec_process.py	/^from .utils import regist, get_current_function_name, tb_callback$/;"	kind:namespace	line:20
+get_current_function_name	../speech_recognizer\process\utils.py	/^def get_current_function_name():$/;"	kind:function	line:41
+get_main_voice	../speech_recognizer\libsr\preprocessing\steps\denoising.py	/^def get_main_voice(wav, filter_threshold=0.1, seg_length=800):$/;"	kind:function	line:7
+glob	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^import glob$/;"	kind:namespace	line:4
+gmtime	../speech_recognizer\command\predict_submit.py	/^from time import gmtime, strftime$/;"	kind:namespace	line:3
+include_dirs	../setup.py	/^          include_dirs=[numpy.get_include()],$/;"	kind:variable	line:46
+include_package_data	../setup.py	/^    include_package_data=True,$/;"	kind:variable	line:61
+inspect	../speech_recognizer\process\utils.py	/^import inspect$/;"	kind:namespace	line:1
+install_requires	../setup.py	/^    install_requires=REQUIREMETS,$/;"	kind:variable	line:62
+json	../speech_recognizer\libsr\__init__.py	/^import json$/;"	kind:namespace	line:2
+json	../speech_recognizer\libsr\data_gen\tran_data.py	/^import json$/;"	kind:namespace	line:1
+keras	../speech_recognizer\process\utils.py	/^import keras$/;"	kind:namespace	line:3
+keywords	../setup.py	/^    keywords=KEYWORDS,$/;"	kind:variable	line:59
+label_transform	../speech_recognizer\libsr\data_gen\label_transform.py	/^def label_transform(labels):$/;"	kind:function	line:7
+label_transform	../speech_recognizer\libsr\data_gen\tran_data.py	/^from .label_transform import label_transform$/;"	kind:namespace	line:4
+label_transform.py	../speech_recognizer\libsr\data_gen\label_transform.py	1;"	kind:file	line:1
+language	../setup.py	/^          language = "c++")$/;"	kind:variable	line:47
+license	../setup.py	/^    license=LICENSE,$/;"	kind:variable	line:57
+load_model	../speech_recognizer\libsr\__init__.py	/^from keras.models import load_model$/;"	kind:namespace	line:3
+logSpectrum	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^logSpectrum = numpy.log(filteredSpectrum)$/;"	kind:variable	line:13
+log_spec_perprocess	../speech_recognizer\libsr\preprocessing\__init__.py	/^from .log_specgram_perprocess import log_spec_perprocess$/;"	kind:namespace	line:1
+log_spec_perprocess	../speech_recognizer\libsr\preprocessing\log_specgram_perprocess.py	/^def log_spec_perprocess(sample_rate, samples):$/;"	kind:function	line:8
+log_specgram	../speech_recognizer\libsr\preprocessing\log_specgram_perprocess.py	/^from .steps.log_specgram import log_specgram$/;"	kind:namespace	line:3
+log_specgram	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	/^def log_specgram(audio, sample_rate, *, window='hann', window_size=20,$/;"	kind:function	line:8
+log_specgram.py	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	1;"	kind:file	line:1
+log_specgram_from_path	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	/^def log_specgram_from_path(record_path, *, window='hann', window_size=20,$/;"	kind:function	line:35
+log_specgram_perprocess.py	../speech_recognizer\libsr\preprocessing\log_specgram_perprocess.py	1;"	kind:file	line:1
+long_description	../setup.py	/^    long_description=LONG_DESCRIPTION,$/;"	kind:variable	line:53
+main	../main.py	/^    from speech_recognizer.main import main$/;"	kind:namespace	line:6
+main	../speech_recognizer\main.py	/^def main(argv=sys.argv[1:]):$/;"	kind:function	line:99
+main.py	../main.py	1;"	kind:file	line:1
+main.py	../speech_recognizer\main.py	1;"	kind:file	line:1
+math	../speech_recognizer\libsr\data_gen\find_record.py	/^import math$/;"	kind:namespace	line:1
+matplotlib	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^    import matplotlib.pyplot as plt$/;"	kind:namespace	line:77
+matplotlib	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^    import matplotlib.pyplot as plt$/;"	kind:namespace	line:55
+maxHz	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^maxHz = 22.000$/;"	kind:variable	line:8
+melFilterBank	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^def melFilterBank(blockSize):$/;"	kind:function	line:17
+melToFreq	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^def melToFreq(mel):$/;"	kind:function	line:53
+mfcc	../speech_recognizer\libsr\preprocessing\mfcc_perprocess.py	/^from .steps.mfcc import mfcc$/;"	kind:namespace	line:3
+mfcc	../speech_recognizer\libsr\preprocessing\steps\mfcc.py	/^def mfcc(audio, sample_rate, **kwargs):$/;"	kind:function	line:5
+mfcc.py	../speech_recognizer\libsr\preprocessing\steps\mfcc.py	1;"	kind:file	line:1
+mfcc_from_path	../speech_recognizer\libsr\preprocessing\steps\mfcc.py	/^def mfcc_from_path(record_path, **kwargs):$/;"	kind:function	line:19
+mfcc_perprocess	../speech_recognizer\libsr\preprocessing\__init__.py	/^from .mfcc_perprocess import mfcc_perprocess/;"	kind:namespace	line:2
+mfcc_perprocess	../speech_recognizer\libsr\preprocessing\mfcc_perprocess.py	/^def mfcc_perprocess(sample_rate, samples):$/;"	kind:function	line:8
+mfcc_perprocess.py	../speech_recognizer\libsr\preprocessing\mfcc_perprocess.py	1;"	kind:file	line:1
+minHz	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^minHz = 0$/;"	kind:variable	line:7
+mix_background_noise	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	/^from .steps.mix_noise import mix_background_noise$/;"	kind:namespace	line:1
+mix_background_noise	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^def mix_background_noise(wav, background_volume_range=0.1, background_frequency=0.1):$/;"	kind:function	line:8
+mix_noise.py	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	1;"	kind:file	line:1
+multiprocessing	../speech_recognizer\command\train.py	/^import multiprocessing$/;"	kind:namespace	line:2
+name	../setup.py	/^    name=PROJECTNAME,$/;"	kind:variable	line:50
+normalization.py	../speech_recognizer\libsr\preprocessing\steps\normalization.py	1;"	kind:file	line:1
+normalization_global	../speech_recognizer\libsr\preprocessing\steps\normalization.py	/^def normalization_global(spectrograms):$/;"	kind:function	line:22
+normalization_local	../speech_recognizer\libsr\preprocessing\steps\normalization.py	/^def normalization_local(spectrogram):$/;"	kind:function	line:7
+np	../speech_recognizer\command\predict.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\command\predict_submit.py	/^import numpy as np$/;"	kind:namespace	line:5
+np	../speech_recognizer\libsr\data_augmentation\steps\desired_samples.py	/^import numpy as np$/;"	kind:namespace	line:2
+np	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\libsr\data_augmentation\steps\silence_as_zero.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^import numpy as np$/;"	kind:namespace	line:4
+np	../speech_recognizer\libsr\data_gen\tran_data.py	/^import numpy as np$/;"	kind:namespace	line:2
+np	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	/^import numpy as np$/;"	kind:namespace	line:4
+np	../speech_recognizer\libsr\preprocessing\steps\denoising.py	/^import numpy as np$/;"	kind:namespace	line:4
+np	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\libsr\preprocessing\steps\normalization.py	/^import numpy as np$/;"	kind:namespace	line:4
+np	../speech_recognizer\libsr\preprocessing\steps\padding.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	../speech_recognizer\libsr\preprocessing\steps\vad.py	/^import numpy as np$/;"	kind:namespace	line:4
+np	../speech_recognizer\libsr\preprocessing\steps\zero_silence.py	/^import numpy as np$/;"	kind:namespace	line:2
+numCoefficients	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^numCoefficients = 13  # choose the sive of mfcc array$/;"	kind:variable	line:6
+numpy	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^import numpy$/;"	kind:namespace	line:1
+open	../setup.py	/^from codecs import open$/;"	kind:namespace	line:1
+p	../speech_recognizer\process\utils.py	/^p = Path(__file__).absolute()$/;"	kind:variable	line:4
+packages	../setup.py	/^    packages=PACKAGES,$/;"	kind:variable	line:60
+padding.py	../speech_recognizer\libsr\preprocessing\steps\padding.py	1;"	kind:file	line:1
+padding_spec	../speech_recognizer\libsr\preprocessing\steps\padding.py	/^def padding_spec(spec, max_lenght=16000):$/;"	kind:function	line:6
+padding_wave	../speech_recognizer\libsr\preprocessing\log_specgram_perprocess.py	/^from .steps.padding import padding_wave$/;"	kind:namespace	line:5
+padding_wave	../speech_recognizer\libsr\preprocessing\mfcc_perprocess.py	/^from .steps.padding import padding_wave$/;"	kind:namespace	line:5
+padding_wave	../speech_recognizer\libsr\preprocessing\steps\padding.py	/^def padding_wave(sample, max_lenght=16000):$/;"	kind:function	line:24
+path	../setup.py	/^from os import path$/;"	kind:namespace	line:3
+pd	../speech_recognizer\libsr\data_gen\label_transform.py	/^import pandas as pd$/;"	kind:namespace	line:1
+plt	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^    import matplotlib.pyplot as plt$/;"	kind:namespace	line:77
+plt	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^    import matplotlib.pyplot as plt$/;"	kind:namespace	line:55
+possible_labels	../speech_recognizer\libsr\data_gen\find_record.py	/^possible_labels = ['silence', 'unknown'] + wanted_words$/;"	kind:variable	line:11
+powerSpectrum	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^powerSpectrum = abs(complexSpectrum) ** 2$/;"	kind:variable	line:11
+predict	../speech_recognizer\command\predict.py	/^from speech_recognizer.libsr import predict$/;"	kind:namespace	line:8
+predict	../speech_recognizer\command\predict_submit.py	/^from speech_recognizer.libsr import predict$/;"	kind:namespace	line:10
+predict	../speech_recognizer\libsr\__init__.py	/^def predict(process_name, featureset, batch_size=32, verbose=0):$/;"	kind:function	line:45
+predict	../speech_recognizer\main.py	/^    def predict(self):$/;"	kind:member	line:51
+predict.py	../speech_recognizer\command\predict.py	1;"	kind:file	line:1
+predict_command	../speech_recognizer\command\predict.py	/^def predict_command(args: Namespace)->None:$/;"	kind:function	line:11
+predict_command	../speech_recognizer\main.py	/^from speech_recognizer.command.predict import predict_command$/;"	kind:namespace	line:4
+predict_submit	../speech_recognizer\main.py	/^    def predict_submit(self):$/;"	kind:member	line:65
+predict_submit.py	../speech_recognizer\command\predict_submit.py	1;"	kind:file	line:1
+predict_submit_command	../speech_recognizer\command\predict_submit.py	/^def predict_submit_command(args: Namespace)->None:$/;"	kind:function	line:55
+predict_submit_command	../speech_recognizer\main.py	/^from speech_recognizer.command.predict_submit import predict_submit_command$/;"	kind:namespace	line:5
+python_speech_features	../speech_recognizer\libsr\preprocessing\steps\mfcc.py	/^import python_speech_features$/;"	kind:namespace	line:2
+random	../speech_recognizer\libsr\data_gen\find_record.py	/^import random$/;"	kind:namespace	line:2
+regist	../speech_recognizer\process\cnn_spec_process.py	/^from .utils import regist, get_current_function_name, tb_callback$/;"	kind:namespace	line:20
+regist	../speech_recognizer\process\utils.py	/^class regist:$/;"	kind:class	line:51
+remove_muted	../speech_recognizer\libsr\preprocessing\steps\vad.py	/^def remove_muted(wav, muted_rate=0.05):$/;"	kind:function	line:7
+resample	../speech_recognizer\libsr\preprocessing\log_specgram_perprocess.py	/^from .steps.resample import resample$/;"	kind:namespace	line:4
+resample	../speech_recognizer\libsr\preprocessing\mfcc_perprocess.py	/^from .steps.resample import resample$/;"	kind:namespace	line:4
+resample	../speech_recognizer\libsr\preprocessing\steps\resample.py	/^def resample(samples, sample_rate, *, new_sample_rate=8000):$/;"	kind:function	line:7
+resample.py	../speech_recognizer\libsr\preprocessing\steps\resample.py	1;"	kind:file	line:1
+resample_from_path	../speech_recognizer\libsr\preprocessing\steps\resample.py	/^def resample_from_path(record_path, *, new_sample_rate=8000):$/;"	kind:function	line:25
+run_tf_board	../speech_recognizer\command\tf_board.py	/^def run_tf_board(process_name):$/;"	kind:function	line:8
+run_tf_board	../speech_recognizer\command\train.py	/^from .tf_board import run_tf_board$/;"	kind:namespace	line:5
+setup	../setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:2
+setup.py	../setup.py	1;"	kind:file	line:1
+shift_and_pad_zeros	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	/^from .steps.time_shift import shift_and_pad_zeros$/;"	kind:namespace	line:2
+shift_and_pad_zeros	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^def shift_and_pad_zeros(wav, time_shift=2000):$/;"	kind:function	line:8
+signal	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	/^from scipy import signal$/;"	kind:namespace	line:4
+signal	../speech_recognizer\libsr\preprocessing\steps\resample.py	/^from scipy import signal$/;"	kind:namespace	line:4
+silence_as_zero	../speech_recognizer\libsr\data_augmentation\augmentation_process.py	/^from .steps.silence_as_zero import silence_as_zero$/;"	kind:namespace	line:4
+silence_as_zero	../speech_recognizer\libsr\data_augmentation\steps\silence_as_zero.py	/^def silence_as_zero(wav, label):$/;"	kind:function	line:6
+silence_as_zero	../speech_recognizer\libsr\preprocessing\steps\zero_silence.py	/^def silence_as_zero(wav, label):$/;"	kind:function	line:5
+silence_as_zero.py	../speech_recognizer\libsr\data_augmentation\steps\silence_as_zero.py	1;"	kind:file	line:1
+sources	../setup.py	/^          sources = ["speech_recognizer\/libspeech_recognizer.pyx"],$/;"	kind:variable	line:45
+spec_mfcc.py	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	1;"	kind:file	line:1
+strftime	../speech_recognizer\command\predict_submit.py	/^from time import gmtime, strftime$/;"	kind:namespace	line:3
+subprocess	../speech_recognizer\command\tf_board.py	/^import subprocess$/;"	kind:namespace	line:4
+summary	../speech_recognizer\command\summary.py	/^from speech_recognizer.libsr import summary$/;"	kind:namespace	line:2
+summary	../speech_recognizer\libsr\__init__.py	/^def summary(process_name):$/;"	kind:function	line:68
+summary	../speech_recognizer\main.py	/^    def summary(self):$/;"	kind:member	line:79
+summary.py	../speech_recognizer\command\summary.py	1;"	kind:file	line:1
+summary_command	../speech_recognizer\command\summary.py	/^def summary_command(args: Namespace)->None:$/;"	kind:function	line:5
+summary_command	../speech_recognizer\main.py	/^from speech_recognizer.command.summary import summary_command$/;"	kind:namespace	line:6
+sys	../main.py	/^import sys$/;"	kind:namespace	line:2
+sys	../speech_recognizer\main.py	/^import sys$/;"	kind:namespace	line:1
+tb_callback	../speech_recognizer\process\cnn_spec_process.py	/^from .utils import regist, get_current_function_name, tb_callback$/;"	kind:namespace	line:20
+tb_callback	../speech_recognizer\process\utils.py	/^def tb_callback(process_name,  histogram_freq=0,$/;"	kind:function	line:10
+test_data	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def test_data(self):$/;"	kind:member	line:131
+test_data_gen	../speech_recognizer\command\predict_submit.py	/^def test_data_gen(process_name, batch_size=200):$/;"	kind:function	line:16
+test_gen	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def test_gen(self, batch_size):$/;"	kind:member	line:227
+tf_board	../speech_recognizer\main.py	/^    def tf_board(self):$/;"	kind:member	line:89
+tf_board.py	../speech_recognizer\command\tf_board.py	1;"	kind:file	line:1
+tf_board_command	../speech_recognizer\command\tf_board.py	/^def tf_board_command(args: Namespace)->None:$/;"	kind:function	line:16
+tf_board_command	../speech_recognizer\main.py	/^from speech_recognizer.command.tf_board import tf_board_command$/;"	kind:namespace	line:7
+time_shift.py	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	1;"	kind:file	line:1
+tqdm	../speech_recognizer\command\predict_submit.py	/^from tqdm import tqdm$/;"	kind:namespace	line:4
+train	../speech_recognizer\libsr\train.py	/^def train(model_blueprint, x, y, epochs, batch_size,$/;"	kind:function	line:4
+train	../speech_recognizer\main.py	/^    def train(self):$/;"	kind:member	line:39
+train.py	../speech_recognizer\command\train.py	1;"	kind:file	line:1
+train.py	../speech_recognizer\libsr\train.py	1;"	kind:file	line:1
+train_command	../speech_recognizer\command\train.py	/^def train_command(args: Namespace)->None:$/;"	kind:function	line:8
+train_command	../speech_recognizer\main.py	/^from speech_recognizer.command.train import train_command$/;"	kind:namespace	line:3
+train_data	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def train_data(self):$/;"	kind:member	line:119
+train_gen	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def train_gen(self, batch_size):$/;"	kind:member	line:189
+train_generator	../speech_recognizer\libsr\train.py	/^def train_generator(model_blueprint, generator, steps_per_epoch, epochs=1,$/;"	kind:function	line:29
+train_generator	../speech_recognizer\process\cnn_spec_process.py	/^from speech_recognizer.libsr.train import train_generator$/;"	kind:namespace	line:19
+tran_data.py	../speech_recognizer\libsr\data_gen\tran_data.py	1;"	kind:file	line:1
+url	../setup.py	/^    url=URL,$/;"	kind:variable	line:54
+utils.py	../speech_recognizer\process\utils.py	1;"	kind:file	line:1
+vad.py	../speech_recognizer\libsr\preprocessing\steps\vad.py	1;"	kind:file	line:1
+validation_data	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def validation_data(self):$/;"	kind:member	line:125
+validation_gen	../speech_recognizer\libsr\data_gen\tran_data.py	/^    def validation_gen(self, batch_size):$/;"	kind:member	line:208
+version	../setup.py	/^    version=VERSION,$/;"	kind:variable	line:51
+wanted_words	../speech_recognizer\libsr\data_gen\find_record.py	/^wanted_words = ['yes', 'no', 'up', 'down',$/;"	kind:variable	line:9
+wav	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^    wav = _load_wav_file($/;"	kind:variable	line:79
+wav	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^    wav = _load_wav_file($/;"	kind:variable	line:57
+wavfile	../speech_recognizer\command\predict.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:4
+wavfile	../speech_recognizer\command\predict_submit.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:6
+wavfile	../speech_recognizer\libsr\data_augmentation\steps\mix_noise.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
+wavfile	../speech_recognizer\libsr\data_augmentation\steps\time_shift.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
+wavfile	../speech_recognizer\libsr\data_gen\tran_data.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:3
+wavfile	../speech_recognizer\libsr\preprocessing\steps\custom_fft.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
+wavfile	../speech_recognizer\libsr\preprocessing\steps\log_specgram.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:5
+wavfile	../speech_recognizer\libsr\preprocessing\steps\mfcc.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:1
+wavfile	../speech_recognizer\libsr\preprocessing\steps\resample.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:3
+wavfile	../speech_recognizer\libsr\preprocessing\steps\spec_mfcc.py	/^from scipy.io import wavfile$/;"	kind:namespace	line:3
+zero_silence.py	../speech_recognizer\libsr\preprocessing\steps\zero_silence.py	1;"	kind:file	line:1
+zip_safe	../setup.py	/^    zip_safe=ZIP_SAFE,$/;"	kind:variable	line:69
+>>>>>>> origin/dev

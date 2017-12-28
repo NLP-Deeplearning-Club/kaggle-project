@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# PyCharm
+.idea/
+
 # Distribution / packaging
 .Python
 env/
@@ -103,3 +106,12 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# vscode
+
+.vscode/
+
+# submit_files
+
+submit_files/
+
